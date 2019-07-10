@@ -13,7 +13,7 @@ import java.io.IOException;
  * @Date: 2019/7/10 9:21
  * @Version 1.0
  */
-@Component
+//@Component
 public class TaskTest {
     @Scheduled(cron = "0/5 * * * * *")
     public void test(){

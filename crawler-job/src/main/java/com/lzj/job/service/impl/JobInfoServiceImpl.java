@@ -5,6 +5,8 @@ import com.lzj.job.pojo.JobInfo;
 import com.lzj.job.service.JobInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -40,5 +42,11 @@ public class JobInfoServiceImpl implements JobInfoService {
         List<JobInfo> list = this.jobInfoDao.findAll(example);
 
         return list;
+    }
+
+    @Override
+    public Page<JobInfo> findJobInfoByPage(int page, int rows) {
+        Page<JobInfo> jobInfos = this.jobInfoDao.findAll(PageRequest.of(page - 1, rows));
+        return jobInfos;
     }
 }

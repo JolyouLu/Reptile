@@ -13,7 +13,7 @@ import us.codecraft.webmagic.pipeline.Pipeline;
  * @Date: 2019/7/10 8:52
  * @Version 1.0
  */
-@Component
+//@Component
 public class SpringDataPipeline implements Pipeline {
 
     @Autowired

@@ -10,6 +10,7 @@
         <module name="crawler-job" />
         <module name="crawler-webmagic" />
         <module name="demo" />
+        <module name="es" />
         <module name="maven-archiver" />
         <module name="simhasher" />
         <module name="webmagic-core" />
