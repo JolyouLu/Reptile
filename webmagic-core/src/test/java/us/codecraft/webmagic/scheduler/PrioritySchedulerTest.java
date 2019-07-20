@@ -29,47 +29,47 @@ public class PrioritySchedulerTest {
     public void testDifferentPriority() {
         Request request = new Request("a");
         request.setPriority(100);
-        priorityScheduler.push(request,task);
+        priorityScheduler.push(request, task);
 
         request = new Request("b");
         request.setPriority(900);
-        priorityScheduler.push(request,task);
+        priorityScheduler.push(request, task);
 
         request = new Request("c");
-        priorityScheduler.push(request,task);
+        priorityScheduler.push(request, task);
 
         request = new Request("d");
         request.setPriority(-900);
-        priorityScheduler.push(request,task);
+        priorityScheduler.push(request, task);
 
         Request poll = priorityScheduler.poll(task);
-        Assert.assertEquals("b",poll.getUrl());
+        Assert.assertEquals("b", poll.getUrl());
         poll = priorityScheduler.poll(task);
-        Assert.assertEquals("a",poll.getUrl());
+        Assert.assertEquals("a", poll.getUrl());
         poll = priorityScheduler.poll(task);
-        Assert.assertEquals("c",poll.getUrl());
+        Assert.assertEquals("c", poll.getUrl());
         poll = priorityScheduler.poll(task);
-        Assert.assertEquals("d",poll.getUrl());
+        Assert.assertEquals("d", poll.getUrl());
     }
 
     @Test
     public void testNoPriority() {
         Request request = new Request("a");
-        priorityScheduler.push(request,task);
+        priorityScheduler.push(request, task);
 
         request = new Request("b");
-        priorityScheduler.push(request,task);
+        priorityScheduler.push(request, task);
 
         request = new Request("c");
-        priorityScheduler.push(request,task);
+        priorityScheduler.push(request, task);
 
         Request poll = priorityScheduler.poll(task);
-        Assert.assertEquals("a",poll.getUrl());
+        Assert.assertEquals("a", poll.getUrl());
 
         poll = priorityScheduler.poll(task);
-        Assert.assertEquals("b",poll.getUrl());
+        Assert.assertEquals("b", poll.getUrl());
 
         poll = priorityScheduler.poll(task);
-        Assert.assertEquals("c",poll.getUrl());
+        Assert.assertEquals("c", poll.getUrl());
     }
 }

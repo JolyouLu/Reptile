@@ -32,17 +32,17 @@ public class HttpClientPoolTest {
         //不是每次创建新的HttpClient，而是从链接池中获取HttpClient对象
         CloseableHttpClient httpClient = HttpClients.custom().setConnectionManager(cm).build();
         HttpGet httpGet = new HttpGet("http://www.itcast.cn/");
-        CloseableHttpResponse response =null;
+        CloseableHttpResponse response = null;
         try {
             response = httpClient.execute(httpGet);
-            if (response.getStatusLine().getStatusCode()==200){
+            if (response.getStatusLine().getStatusCode() == 200) {
                 String content = EntityUtils.toString(response.getEntity(), "utf-8");
                 System.out.println(content.length());
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            if (!response.equals(null)){
+        } finally {
+            if (!response.equals(null)) {
                 try {
                     response.close();
                 } catch (IOException e) {

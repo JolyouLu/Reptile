@@ -24,11 +24,11 @@ public class CarTestServiceImpl implements CarTestService {
     @Override
     public List<String> queryTitleByPage(int page, int rows) {
         //计算从那一条数据开始查
-        int start = (page-1)*rows;
+        int start = (page - 1) * rows;
         //封装参数map
-        Map<String,Object> map = new HashMap<>();
-        map.put("start",start);
-        map.put("rows",rows);
+        Map<String, Object> map = new HashMap<>();
+        map.put("start", start);
+        map.put("rows", rows);
         //使用mapper从数据库查询数据
         List<String> list = this.carTestMapper.queryTitleByPage(map);
         return list;

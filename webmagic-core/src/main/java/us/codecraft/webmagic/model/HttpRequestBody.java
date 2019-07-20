@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * @author code4crafter@gmail.com
- *         Date: 17/4/8
+ * Date: 17/4/8
  */
 public class HttpRequestBody implements Serializable {
 
@@ -84,7 +84,7 @@ public class HttpRequestBody implements Serializable {
         return new HttpRequestBody(body, contentType, encoding);
     }
 
-    public static HttpRequestBody form(Map<String,Object> params, String encoding){
+    public static HttpRequestBody form(Map<String, Object> params, String encoding) {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(params.size());
         for (Map.Entry<String, Object> entry : params.entrySet()) {
             nameValuePairs.add(new BasicNameValuePair(entry.getKey(), String.valueOf(entry.getValue())));

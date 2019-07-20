@@ -39,9 +39,9 @@ public class AutoHomeTest {
     private TitleFilter titleFilter;
 
     @Test
-    public void testCrawler()throws Exception{
+    public void testCrawler() throws Exception {
         //声明爬取的页面
-        String url="https://www.autohome.com.cn/bestauto/1";
+        String url = "https://www.autohome.com.cn/bestauto/1";
         //使用ApiService爬取数据
         //使用jsoup解析页面
         Document dom = Jsoup.parse(new File("D:/images/test.html"), "UTF-8");
@@ -51,7 +51,7 @@ public class AutoHomeTest {
         for (Element div : divs) {
             //去重过滤，重复的数据不需要处理了
             String title = div.select("div.uibox-title").first().text();
-            if (titleFilter.contains(title)){
+            if (titleFilter.contains(title)) {
                 //如果数据存在，表示重复，进行下一个遍历
                 continue;
             }
@@ -69,6 +69,7 @@ public class AutoHomeTest {
 
     /**
      * 解析传递进来的元素,下载评测图片
+     *
      * @param div
      * @return
      */
@@ -80,24 +81,25 @@ public class AutoHomeTest {
         //遍历评测图片的元素
         for (Element element : Page) {
             //获取评测图片的地址
-            String imagPage = "https:"+element.select("a").attr("href");
+            String imagPage = "https:" + element.select("a").attr("href");
             //使用apiservice发起请求获取展示页面
             String html = this.apiService.getHtml(imagPage);
             //解析图片展示页面
             Document dom = Jsoup.parse(html);
             //获取图片url地址
-            String imageUrl = "https:"+dom.getElementById("img").attr("src");
+            String imageUrl = "https:" + dom.getElementById("img").attr("src");
             //根据图片url地址下载图片，返回图片名称
             String image = this.apiService.getImage(imageUrl);
             //把图片放入集合中
             images.add(image);
         }
         //把图片名称返回，把集合转为字符串用逗号分隔
-        return StringUtils.join(images,",");
+        return StringUtils.join(images, ",");
     }
 
     /**
      * 解析传递进来的元素封装为评测对象
+     *
      * @param div
      * @return
      */
@@ -115,7 +117,7 @@ public class AutoHomeTest {
         carTest.setTestBrake(this.changeStr2Num(brake));
         //油耗评测
         String oil = div.select(".tabbox1 dd:nth-child(4) div.dd-div2").first().text();
-        if (!oil.equals("--")){
+        if (!oil.equals("--")) {
             carTest.setTestOil(this.changeStr2Num(oil));
         }
         //编辑1
@@ -142,13 +144,14 @@ public class AutoHomeTest {
 
     /**
      * 把字符串最后一个字符去掉，转为数字*1000
+     *
      * @param str
      */
     private int changeStr2Num(String str) {
         //把字符串最后一位去掉
-        str = str.substring(0, str.length()-1);
+        str = str.substring(0, str.length() - 1);
         //把字符串转为小数，必须使用number接受，否则会有精度丢失
-        Number num = Float.parseFloat(str)*1000;
+        Number num = Float.parseFloat(str) * 1000;
         return num.intValue();
     }
 }

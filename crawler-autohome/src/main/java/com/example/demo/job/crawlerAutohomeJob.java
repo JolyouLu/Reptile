@@ -51,10 +51,10 @@ public class crawlerAutohomeJob extends QuartzJobBean {
         this.titleFilter = applicationContext.getBean(TitleFilter.class);
 
 
-        for (int i = 1; i<139;i++ ) {
+        for (int i = 1; i < 139; i++) {
 
             //声明爬取的页面
-            String url = "https://www.autohome.com.cn/bestauto/"+i;
+            String url = "https://www.autohome.com.cn/bestauto/" + i;
             //使用ApiService爬取数据
             String html = this.apiService.getHtml(url);
             //使用jsoup解析页面
@@ -81,12 +81,14 @@ public class crawlerAutohomeJob extends QuartzJobBean {
         }
 
     }
+
     /**
      * 解析传递进来的元素,下载评测图片
+     *
      * @param div
      * @return
      */
-    private String getCarImage (Element div){
+    private String getCarImage(Element div) {
         //声明存放图片名称的集合
         List<String> images = new ArrayList<>();
         //获取图片的url地址
@@ -112,10 +114,11 @@ public class crawlerAutohomeJob extends QuartzJobBean {
 
     /**
      * 解析传递进来的元素封装为评测对象
+     *
      * @param div
      * @return
      */
-    private CarTest getCarTest (Element div){
+    private CarTest getCarTest(Element div) {
         //创建评测对象
         CarTest carTest = new CarTest();
         //设置评测数据
@@ -154,14 +157,15 @@ public class crawlerAutohomeJob extends QuartzJobBean {
 
     /**
      * 把字符串最后一个字符去掉，转为数字*1000
+     *
      * @param str
      */
-    private int changeStr2Num (String str){
+    private int changeStr2Num(String str) {
         //把字符串最后一位去掉
         str = str.substring(0, str.length() - 1);
         try {
             //把字符串转为小数，必须使用number接受，否则会有精度丢失
-            Number num= Float.parseFloat(str) * 1000;
+            Number num = Float.parseFloat(str) * 1000;
             return num.intValue();
         } catch (NumberFormatException e) {
             e.printStackTrace();

@@ -10,31 +10,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.util.StringJoiner;
 
-@Document(indexName = "jobinfo",type = "JobInfoField")
+@Document(indexName = "jobinfo", type = "JobInfoField")
 public class JobInfoField {
 
     @Id
-    @Field(index = true,store = true,type = FieldType.Long)
+    @Field(index = true, store = true, type = FieldType.Long)
     private Long id;
-    @Field(index = true,store = true,analyzer = "ik_smart",searchAnalyzer = "ik_smart",type = FieldType.Text)
+    @Field(index = true, store = true, analyzer = "ik_smart", searchAnalyzer = "ik_smart", type = FieldType.Text)
     private String companyName;
-    @Field(index = true,store = true,analyzer = "ik_smart",searchAnalyzer = "ik_smart",type = FieldType.Text)
+    @Field(index = true, store = true, analyzer = "ik_smart", searchAnalyzer = "ik_smart", type = FieldType.Text)
     private String companyAddr;
-    @Field(index = true,store = true,analyzer = "ik_smart",searchAnalyzer = "ik_smart",type = FieldType.Text)
+    @Field(index = true, store = true, analyzer = "ik_smart", searchAnalyzer = "ik_smart", type = FieldType.Text)
     private String companyInfo;
-    @Field(index = true,store = true,analyzer = "ik_smart",searchAnalyzer = "ik_smart",type = FieldType.Text)
+    @Field(index = true, store = true, analyzer = "ik_smart", searchAnalyzer = "ik_smart", type = FieldType.Text)
     private String jobName;
-    @Field(index = true,store = true,analyzer = "ik_smart",searchAnalyzer = "ik_smart",type = FieldType.Text)
+    @Field(index = true, store = true, analyzer = "ik_smart", searchAnalyzer = "ik_smart", type = FieldType.Text)
     private String jobAddr;
-    @Field(index = true,store = true,analyzer = "ik_smart",searchAnalyzer = "ik_smart",type = FieldType.Text)
+    @Field(index = true, store = true, analyzer = "ik_smart", searchAnalyzer = "ik_smart", type = FieldType.Text)
     private String jobInfo;
-    @Field(index = true,store = true,type = FieldType.Integer)
+    @Field(index = true, store = true, type = FieldType.Integer)
     private Integer salaryMin;
-    @Field(index = true,store = true,type = FieldType.Integer)
+    @Field(index = true, store = true, type = FieldType.Integer)
     private Integer salaryMax;
-    @Field(index = true,store = true,type = FieldType.Text)
+    @Field(index = true, store = true, type = FieldType.Text)
     private String url;
-    @Field(index = true,store = true,type = FieldType.Text)
+    @Field(index = true, store = true, type = FieldType.Text)
     private String time;
 
     public Long getId() {

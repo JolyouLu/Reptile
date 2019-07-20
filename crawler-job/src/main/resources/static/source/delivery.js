@@ -10,10 +10,8 @@
  */
 
 //投递过程
-function delivery(sJobIdElementName, sDeliveryType, sDomainMy, sLanguage, sPrd, sPrp, sCp, sImgPath, callback)
-{
-    if ($('#deliveryLayer').parent().css('visibility') == 'hidden')
-    {
+function delivery(sJobIdElementName, sDeliveryType, sDomainMy, sLanguage, sPrd, sPrp, sCp, sImgPath, callback) {
+    if ($('#deliveryLayer').parent().css('visibility') == 'hidden') {
         $('#deliveryLayer').remove();
     }
 
@@ -36,34 +34,31 @@ function delivery(sJobIdElementName, sDeliveryType, sDomainMy, sLanguage, sPrd, 
     var sCvLan = $('#cvLanguage').val();
     var sCoverId = $('#coverId').val();
     var sQPostSet = $('input:checkbox[name="qPostSet"]:checked').val();
-    if ($('#tips').attr('tipid') == 2)
-    {
+    if ($('#tips').attr('tipid') == 2) {
         alert('您选择的简历不完整，将不能投递，请完善后再投递。');
         return;
     }
     sDomainMy = window.cfg.domain.i;
-    if (sJob != '()')
-    {
+    if (sJob != '()') {
         var oData = {
-            jobid : sJob,           //职位
-            prd : sPrd,             //来源域名
-            prp : sPrp,             //来源页面
-            cd : sCd,               //投递域名
-            cp : sCp,               //投递页面
-            resumeid : sResumeId,   //简历，可能为空
-            cvlan : sCvLan,         //简历语言，可能为空
-            coverid : sCoverId,     //求职信，可能为空
-            qpostset : sQPostSet,   //快速投递，可能为空
+            jobid: sJob,           //职位
+            prd: sPrd,             //来源域名
+            prp: sPrp,             //来源页面
+            cd: sCd,               //投递域名
+            cp: sCp,               //投递页面
+            resumeid: sResumeId,   //简历，可能为空
+            cvlan: sCvLan,         //简历语言，可能为空
+            coverid: sCoverId,     //求职信，可能为空
+            qpostset: sQPostSet,   //快速投递，可能为空
             elementname: sJobIdElementName,
             deliverytype: sDeliveryType,
             deliverydomain: sDomainMy,
             language: sLanguage,
-            imgpath:sImgPath
+            imgpath: sImgPath
         };
 
-        $.each(oData, function(key,value){
-            if (typeof value == 'undefined')
-            {
+        $.each(oData, function (key, value) {
+            if (typeof value == 'undefined') {
                 oData[key] = '';
             }
         });
@@ -78,8 +73,7 @@ function delivery(sJobIdElementName, sDeliveryType, sDomainMy, sLanguage, sPrd, 
             jsonp: "jsoncallback",
             data: oData,
             success: function (result) {   //成功后回调
-                if (typeof(callback) === 'function')
-                {
+                if (typeof (callback) === 'function') {
                     Delivery.setCallback(callback);
                 }
                 Delivery.ajaxCallback(result);
@@ -88,100 +82,90 @@ function delivery(sJobIdElementName, sDeliveryType, sDomainMy, sLanguage, sPrd, 
                 alert('error');
             }
         });
-    }
-    else
-    {
+    } else {
         alert('请选择职位再投递！');
     }
 }
 
 
-var Delivery = (function(){
+var Delivery = (function () {
     var sPrp = '';
     var sPrd = '';
     var singleType = '';
     var sImagePath = '';
     var callback = '';
 
-    function setPrd(p_sValue)
-    {
+    function setPrd(p_sValue) {
         sPrd = p_sValue;
     }
-    function setPrp(p_sValue)
-    {
+
+    function setPrp(p_sValue) {
         sPrp = p_sValue;
     }
-    function setImagePath(p_sValue)
-    {
+
+    function setImagePath(p_sValue) {
         sImagePath = p_sValue || window.cfg.domain.img;
     }
-    function setCallback(p_callback)
-    {
+
+    function setCallback(p_callback) {
         callback = p_callback;
     }
 
-    function getJobStr(sJobIdElementName, sDeliveryType)
-    {
+    function getJobStr(sJobIdElementName, sDeliveryType) {
         var sJob = '';
         var iJobId = 0;
         var iJobType = 0;
 
-        var sSelectorStr  = '';
-        if (sDeliveryType == 1)
-        {
+        var sSelectorStr = '';
+        if (sDeliveryType == 1) {
             //单个职位的页面
             sSelectorStr = 'input[name="' + sJobIdElementName + '"]';
             singleType = $(sSelectorStr).attr('jt');   //单个职位的跟踪
-        }
-        else if(sDeliveryType == 3)
-        {
+        } else if (sDeliveryType == 3) {
             //多个职位的页面单个投递，通过id
             sSelectorStr = '#' + sJobIdElementName;
-        }
-        else
-        {
+        } else {
             //多个职位的页面多选投递
-            sSelectorStr = 'input:checkbox[name="'+ sJobIdElementName +'"]:checked';
+            sSelectorStr = 'input:checkbox[name="' + sJobIdElementName + '"]:checked';
         }
 
         $(sSelectorStr).each(function () {
             iJobId = $(this).attr('value');
             iJobType = $(this).attr('jt');
 
-            if (isNaN(iJobId)) {iJobId = 0;}
-            if (isNaN(iJobType)) {iJobType = '';}
+            if (isNaN(iJobId)) {
+                iJobId = 0;
+            }
+            if (isNaN(iJobType)) {
+                iJobType = '';
+            }
 
             if (iJobType == '') {
-                sJob =  sJob + iJobId + ',';
+                sJob = sJob + iJobId + ',';
             } else {
-                sJob =  sJob + iJobId + ':' + iJobType + ',';
+                sJob = sJob + iJobId + ':' + iJobType + ',';
             }
         });
 
-        if (sJob != '')
-        {
-            sJob = sJob.substring(0, sJob.length-1);
+        if (sJob != '') {
+            sJob = sJob.substring(0, sJob.length - 1);
         }
         return '(' + sJob + ')';
     }
 
     //返回结果处理
-    function ajaxCallback(oResult)
-    {
+    function ajaxCallback(oResult) {
         var iType = oResult.type;
         var sContent = oResult.content;
-        if (typeof iType == 'undefined' || typeof sContent == 'undefined')
-        {
+        if (typeof iType == 'undefined' || typeof sContent == 'undefined') {
             iType = 1;
             sContent = '';
         }
         showRemind(iType, sContent);
     }
 
-    function showRemind(p_iType, p_sContent)
-    {
-        switch (p_iType)
-        {
+    function showRemind(p_iType, p_sContent) {
+        switch (p_iType) {
             case 1:
                 alert(p_sContent);
                 if ($(".layer_class, .layer_back_drop_class").length > 0) {
@@ -209,8 +193,7 @@ var Delivery = (function(){
     }
 
     //弹层等处理
-    function remindLayer(p_oLayerInfo)
-    {
+    function remindLayer(p_oLayerInfo) {
         var sLayer = p_oLayerInfo.layer;
         var sHtml = p_oLayerInfo.content.html;
         var oData = p_oLayerInfo.content.data;
@@ -218,32 +201,27 @@ var Delivery = (function(){
         bindAction(sLayer, oData);
     }
 
-    function showLayer(content)
-    {
+    function showLayer(content) {
         var oLayerSettings = jQuery.FLayer.init();
 
-        oLayerSettings['layer_after_close'] = function(){
+        oLayerSettings['layer_after_close'] = function () {
             $(".layer_class, .layer_back_drop_class").remove();
         };
 
-        jQuery.FLayer.setContent(oLayerSettings,content);
+        jQuery.FLayer.setContent(oLayerSettings, content);
         jQuery.FLayer.open(oLayerSettings);
     }
 
-    function bindAction(p_sLayer, p_oData)
-    {
-        if (p_sLayer == 'deliverySuccessLayer')
-        {
-            setTimeout('if($("#deliverySuccessLayer").length>0){$(".layer_close").click();}',2500);
-            if ($("#app_ck").length > 0)
-            {
-                $("#app_ck").attr("href","#").attr("class","but_sq off").removeAttr("onclick");
-                $('#app_ck').html('<img width="22" height="22" src="'+ sImagePath +'/im/jobs/but_img_sq_2.png" alt="" />已申请');
+    function bindAction(p_sLayer, p_oData) {
+        if (p_sLayer == 'deliverySuccessLayer') {
+            setTimeout('if($("#deliverySuccessLayer").length>0){$(".layer_close").click();}', 2500);
+            if ($("#app_ck").length > 0) {
+                $("#app_ck").attr("href", "#").attr("class", "but_sq off").removeAttr("onclick");
+                $('#app_ck').html('<img width="22" height="22" src="' + sImagePath + '/im/jobs/but_img_sq_2.png" alt="" />已申请');
             }
             //若传递了回调函数，投递成功 页面关闭时执行
-            if (typeof(callback) === 'function')
-            {
-                $('.layer_close').click(function(){
+            if (typeof (callback) === 'function') {
+                $('.layer_close').click(function () {
                     callback();
                 });
             }
@@ -251,16 +229,16 @@ var Delivery = (function(){
 
         var oLayer = $('#' + p_sLayer);
         //下拉按钮
-        oLayer.find("span.i_arrow").each(function(){
+        oLayer.find("span.i_arrow").each(function () {
 
             var oButDown = $(this);
             var oSelectLayer = oButDown.siblings(".ul");
 
-            $('body').click(function(){
+            $('body').click(function () {
                 oSelectLayer.hide();
             });
 
-            oButDown.click(function(event) {
+            oButDown.click(function (event) {
                 $('body').click();
                 event.stopPropagation();
                 oSelectLayer.show();
@@ -268,13 +246,13 @@ var Delivery = (function(){
         });
 
         //投递按钮
-        oLayer.find('#apply_now').click(function(event){
+        oLayer.find('#apply_now').click(function (event) {
             event.stopPropagation();
         });
 
         //简历下拉点击
-        oLayer.find('#resumeSelectList_div_data span').each(function(){
-            $(this).click(function(){
+        oLayer.find('#resumeSelectList_div_data span').each(function () {
+            $(this).click(function () {
                 oLayer.find('#rsmText').val($(this).text());
                 oLayer.find('#rsmId').val($(this).attr('data-value'));
                 tip(p_oData);
@@ -282,8 +260,8 @@ var Delivery = (function(){
         });
 
         //中英文下拉点击
-        oLayer.find('#languageSelectList_div_data span').each(function(){
-            $(this).click(function(){
+        oLayer.find('#languageSelectList_div_data span').each(function () {
+            $(this).click(function () {
                 oLayer.find('#languageText').val($(this).text());
                 oLayer.find('#cvLanguage').val($(this).attr('data-value'));
                 tip(p_oData);
@@ -291,8 +269,8 @@ var Delivery = (function(){
         });
 
         //求职信下拉点击
-        oLayer.find('#coverSelect_div_data span').each(function(){
-            $(this).click(function(){
+        oLayer.find('#coverSelect_div_data span').each(function () {
+            $(this).click(function () {
                 oLayer.find('#coverText').val($(this).text());
                 oLayer.find('#coverId').val($(this).attr('data-value'));
             });
@@ -301,14 +279,11 @@ var Delivery = (function(){
         //快速投递默认勾选
         var qPostCheck = oLayer.find('input:checkbox[name="qPostSet"]');
         qPostCheck.attr('checked', true);
-        oLayer.find('#qPostSetEm').click(function() {
+        oLayer.find('#qPostSetEm').click(function () {
             $(this).find('em').toggleClass('on');
-            if (qPostCheck.is(':checked'))
-            {
+            if (qPostCheck.is(':checked')) {
                 qPostCheck.attr('checked', false);
-            }
-            else
-            {
+            } else {
                 qPostCheck.attr('checked', true);
             }
         });
@@ -316,9 +291,9 @@ var Delivery = (function(){
 
         //问号
         oLayer.find('#question').css({
-            'background-image':'url("'+ sImagePath +'/im/2016/form/form.png")'
+            'background-image': 'url("' + sImagePath + '/im/2016/form/form.png")'
         });
-        oLayer.find('#question').click(function(){
+        oLayer.find('#question').click(function () {
             window.open(window.cfg.domain.i + '/resume/help.php?lang=c&module=td');
         });
 
@@ -328,8 +303,7 @@ var Delivery = (function(){
     }
 
     //简历弹层提示语动作
-    function tip(p_oData)
-    {
+    function tip(p_oData) {
         var iResumeId = $('#rsmId').val();
         var iLan = $('#cvLanguage').val();
 
@@ -341,58 +315,54 @@ var Delivery = (function(){
         $('#tips').attr('tipid', '');
 
         $('#tips').append(sTipContent);
-        $('#tips').find('a').click(function(){
+        $('#tips').find('a').click(function () {
             window.open(url);
         });
         $('#tips').attr('tipid', iTipId);
-        if (iTipId == 2)
-        {
-            $('#apply_now').css('background-color','#818181').css('border','#818181');
-        }
-        else
-        {
-            $('#apply_now').css('background-color','#f56101').css('border','#f56101');
+        if (iTipId == 2) {
+            $('#apply_now').css('background-color', '#818181').css('border', '#818181');
+        } else {
+            $('#apply_now').css('background-color', '#f56101').css('border', '#f56101');
         }
         $('#tips').show();
     }
 
     //加载 弹层
-    function loadingLayer()
-    {
+    function loadingLayer() {
         var sContent = '<div id="loadingLayer">'
-            +'<input type="hidden" class="layer_close" />'
-            + '<p align="center"><img src="'+ sImagePath +'/im/2009/loading.gif"></p>'
+            + '<input type="hidden" class="layer_close" />'
+            + '<p align="center"><img src="' + sImagePath + '/im/2009/loading.gif"></p>'
             + '</div>';
 
         var oLayer = {
-            layer:'loadingLayer',
-            content:{html:sContent}
+            layer: 'loadingLayer',
+            content: {html: sContent}
         };
 
         remindLayer(oLayer);
     }
 
-    function windowOpen(url){
+    function windowOpen(url) {
         var aHref = document.getElementById('aHref');
-        if(aHref){
+        if (aHref) {
             aHref.href = url;
-        }else{
-            var aHref    = document.createElement('a');
-            aHref.href   = url;
+        } else {
+            var aHref = document.createElement('a');
+            aHref.href = url;
             aHref.target = '_blank';
-            aHref.id     = 'aHref';
+            aHref.id = 'aHref';
             document.body.appendChild(aHref);
         }
         aHref.click();
     }
 
     return {
-        getJobStr:getJobStr,
-        ajaxCallback:ajaxCallback,
-        loadingLayer:loadingLayer,
-        setPrd:setPrd,
-        setPrp:setPrp,
-        setImagePath:setImagePath,
-        setCallback:setCallback
+        getJobStr: getJobStr,
+        ajaxCallback: ajaxCallback,
+        loadingLayer: loadingLayer,
+        setPrd: setPrd,
+        setPrp: setPrp,
+        setImagePath: setImagePath,
+        setCallback: setCallback
     }
 }());

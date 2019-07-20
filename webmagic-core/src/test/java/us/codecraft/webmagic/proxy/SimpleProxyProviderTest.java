@@ -8,8 +8,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author code4crafter@gmail.com
- *         Date: 17/4/16
- *         Time: 上午10:29
+ * Date: 17/4/16
+ * Time: 上午10:29
  */
 public class SimpleProxyProviderTest {
 

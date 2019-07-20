@@ -31,89 +31,97 @@ public class ESTest {
 
     //创建索引和映射
     @Test
-    public void creatIndex(){
+    public void creatIndex() {
         this.elasticsearchTemplate.createIndex(Item.class);
         this.elasticsearchTemplate.putMapping(Item.class);
     }
 
     //新增
     @Test
-    public void testSave(){
+    public void testSave() {
         Item item = new Item();
         item.setId(100);
         item.setTitle("spring es");
         item.setContent("使用springData 完成搜索功能");
         this.itemService.save(item);
     }
+
     //修改
     @Test
-    public void testUpdate(){
+    public void testUpdate() {
         Item item = new Item();
         item.setId(100);
         item.setTitle("spring es");
         item.setContent("使用springData 完成job搜索功能");
         this.itemService.save(item);
     }
+
     //删除
     @Test
-    public void testDelete(){
+    public void testDelete() {
         Item item = new Item();
         item.setId(100);
         this.itemService.delete(item);
     }
+
     //批量保存
     @Test
-    public void testSaveAll(){
+    public void testSaveAll() {
         //创建集合
         List<Item> list = new ArrayList<Item>();
         //封装数据
-        for (int i=1;i<100;i++){
+        for (int i = 1; i < 100; i++) {
             Item item = new Item();
             item.setId(i);
-            item.setTitle("spring es"+i);
-            item.setContent("使用springData 完成job搜索功能"+i);
+            item.setTitle("spring es" + i);
+            item.setContent("使用springData 完成job搜索功能" + i);
             list.add(item);
         }
         //批量保存
         this.itemService.saveAll(list);
     }
+
     //查询所有数据
     @Test
-    public void testFindAll(){
+    public void testFindAll() {
         Iterable<Item> items = this.itemService.findAll();
         for (Item item : items) {
             System.out.println(item);
         }
     }
+
     //分页查询数据
     @Test
-    public void testFindByPage(){
-        Page<Item> page = this.itemService.findByPage(1,30);
+    public void testFindByPage() {
+        Page<Item> page = this.itemService.findByPage(1, 30);
         for (Item item : page.getContent()) {
             System.out.println(item);
         }
     }
+
     //复杂查询
     //根据title和content进行查询，交集
     @Test
-    public void testFindTitleAndContent(){
-        List<Item> list = this.itemService.findAllByTitleAndContent("es","job");
+    public void testFindTitleAndContent() {
+        List<Item> list = this.itemService.findAllByTitleAndContent("es", "job");
         for (Item item : list) {
             System.out.println(item);
         }
     }
+
     //根据title或者content进行分页擦好像，并集
     @Test
-    public void testFindByTitleOrContent(){
-       Page<Item> page = this.itemService.findByTitleOrContent("es","job",0,5);
+    public void testFindByTitleOrContent() {
+        Page<Item> page = this.itemService.findByTitleOrContent("es", "job", 0, 5);
         for (Item item : page.getContent()) {
             System.out.println(item);
         }
     }
+
     //根据title或者content和id的范围，进行分页查询
     @Test
-    public void testFindByTitleAndContentAndIdBetween(){
-        Page<Item> page = this.itemService.findByTitleAndContentAndIdBetween("es","job",10,16,1,6);
+    public void testFindByTitleAndContentAndIdBetween() {
+        Page<Item> page = this.itemService.findByTitleAndContentAndIdBetween("es", "job", 10, 16, 1, 6);
         for (Item item : page.getContent()) {
             System.out.println(item);
         }

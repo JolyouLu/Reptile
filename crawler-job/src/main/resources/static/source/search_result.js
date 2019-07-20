@@ -1,22 +1,22 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
-    $(window).scroll(function(){
+    $(window).scroll(function () {
         var offsetTop = 0;
-        if($('.dw_tlc').eq(0).hasClass('fix')){
+        if ($('.dw_tlc').eq(0).hasClass('fix')) {
             offsetTop = $('#dw_tlc_mk').offset().top;
-        }else{
+        } else {
             offsetTop = $('.dw_tlc').eq(0).offset().top;
         }
 
-        if($(this).scrollTop() > offsetTop){
-            if(!$('.dw_tlc').hasClass('fix')){
-                $('#dw_tlc_mk').height($('.dw_tlc').eq(0).height()+2);
+        if ($(this).scrollTop() > offsetTop) {
+            if (!$('.dw_tlc').hasClass('fix')) {
+                $('#dw_tlc_mk').height($('.dw_tlc').eq(0).height() + 2);
                 $('.dw_tlc').eq(0).addClass('fix').hide();
                 $('.dw_tlc.fix').fadeIn(500);
             }
             $("[event-type='13']").attr('event-type', 18);
             $("[event-type='14']").attr('event-type', 19);
-        }else{
+        } else {
             $('#dw_tlc_mk').height(0);
             $('.dw_tlc').eq(0).removeClass('fix');
             $("[event-type='18']").attr('event-type', 13);
@@ -24,35 +24,35 @@ $(document).ready(function() {
         }
     });
 
-    $('.dw_filter .el .more').click(function(){//展示更多选项
+    $('.dw_filter .el .more').click(function () {//展示更多选项
         var $parent = $(this).parents('.el');
-        if($parent.hasClass('on')){
+        if ($parent.hasClass('on')) {
             $parent.removeClass('on');
-        }else{
+        } else {
             $parent.addClass('on');
         }
     });
 
 
     //搜索广告展示埋点
-    if($("#search_company_ad").length > 0){
+    if ($("#search_company_ad").length > 0) {
         var trackChangeParams = {
             cusParam: "1" + String.fromCharCode(22) + trackConfig.accountid + String.fromCharCode(22) + $.trim($("#kwdselectid").val()) + String.fromCharCode(22) + ($("#jobarea").val() == "000000" ? "" : $("#jobarea").val()) + String.fromCharCode(22) + $("#coad_companyid").val()
         };
         manualTrack("adShowManualTrack", trackChangeParams);
     }
     //名企关闭按钮
-    $('.com_close').click(function(){
+    $('.com_close').click(function () {
         $('.company').hide()
     })
 });
 
-$(document).mouseup(function() {
+$(document).mouseup(function () {
     $('.tSearch_select_list').find('.intPopbox').hide();
 });
 
 
-function search(keyword,redo) {
+function search(keyword, redo) {
     var ind = '00';
     var fun = '0000';
     var jobarea = '000000';
@@ -80,7 +80,7 @@ function search(keyword,redo) {
     if ($('#keywordtype').length == 1 && $('#keywordtype').val() != '') keywordtype = $('#keywordtype').val();
     if (keyword == '') keyword = ' ';
 
-    if (!redo){
+    if (!redo) {
         if ($('form[name=pageForm] input[name=keyword]').length == 1 && $.trim(keyword) == '') keyword = $('form[name=pageForm] input[name=keyword]').val();
         if (keyword == '') keyword = ' ';
         if ($('form[name=pageForm] input[name=cotype]').val() != '') cotype = $('form[name=pageForm] input[name=cotype]').val();
@@ -99,24 +99,22 @@ function search(keyword,redo) {
         if ($('form[name=pageForm] input[name=radius]').val() != '') radius = $('form[name=pageForm] input[name=radius]').val();
     }
 
-    var url = window.cfg.domain.search + '/list/' + encodeURIComponent(encodeURIComponent(jobarea)) + ',000000,' + encodeURIComponent(encodeURIComponent(fun)) + ',' + encodeURIComponent(encodeURIComponent(ind)) + ',' + encodeURIComponent(encodeURIComponent(issuedate)) + ','+ encodeURIComponent(encodeURIComponent(providesalary)) +',' + encodeURIComponent(encodeURIComponent(keyword)) + ',' + encodeURIComponent(encodeURIComponent(keywordtype)) + ',1.html?lang=c&stype=&postchannel=' + postchannel + '&workyear=' + workyear + '&cotype=' + cotype + '&degreefrom=' + degreefrom + '&jobterm=' + jobterm + '&companysize=' + companysize + '&providesalary=' + providesalary +'&lonlat='+ encodeURIComponent(lonlat) +'&radius='+ encodeURIComponent(radius) +'&ord_field='+ ord_field +'&confirmdate=9&fromType=&dibiaoid='+ dibiaoid +'&address='+ encodeURIComponent(address) +'&line='+ encodeURIComponent(line) +'&specialarea='+ specialarea +'&from=&welfare='+encodeURIComponent(welfare);
+    var url = window.cfg.domain.search + '/list/' + encodeURIComponent(encodeURIComponent(jobarea)) + ',000000,' + encodeURIComponent(encodeURIComponent(fun)) + ',' + encodeURIComponent(encodeURIComponent(ind)) + ',' + encodeURIComponent(encodeURIComponent(issuedate)) + ',' + encodeURIComponent(encodeURIComponent(providesalary)) + ',' + encodeURIComponent(encodeURIComponent(keyword)) + ',' + encodeURIComponent(encodeURIComponent(keywordtype)) + ',1.html?lang=c&stype=&postchannel=' + postchannel + '&workyear=' + workyear + '&cotype=' + cotype + '&degreefrom=' + degreefrom + '&jobterm=' + jobterm + '&companysize=' + companysize + '&providesalary=' + providesalary + '&lonlat=' + encodeURIComponent(lonlat) + '&radius=' + encodeURIComponent(radius) + '&ord_field=' + ord_field + '&confirmdate=9&fromType=&dibiaoid=' + dibiaoid + '&address=' + encodeURIComponent(address) + '&line=' + encodeURIComponent(line) + '&specialarea=' + specialarea + '&from=&welfare=' + encodeURIComponent(welfare);
     window.location = url;
 }
 
-function excludeword()
-{
+function excludeword() {
     if ($.trim($(':input[name=excludekeyword]').val()) == "") {//未填写内容不做关键词处理
-        search($(':input[name=keyword]').val(),0);
+        search($(':input[name=keyword]').val(), 0);
         return false;
     }
-    var val = $(':input[name=excludekeyword]').val().replace( /[^\u3040-\u318f\u3100-\u312f\u3040-\u309F\u30A0-\u30FF\u31F0-\u31FF\u3300-\u337f\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff65-\uff9fa-zA-Z0-9@#$%&+']+/g , ' ' ).trim();
+    var val = $(':input[name=excludekeyword]').val().replace(/[^\u3040-\u318f\u3100-\u312f\u3040-\u309F\u30A0-\u30FF\u31F0-\u31FF\u3300-\u337f\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff65-\uff9fa-zA-Z0-9@#$%&+']+/g, ' ').trim();
     var keyword = '';
-    if ( val ) {
-        keyword = $(':input[name=keyword]').val() + ( ' ' + val ).replace( / +/g , ' -' );
+    if (val) {
+        keyword = $(':input[name=keyword]').val() + (' ' + val).replace(/ +/g, ' -');
     }
-    search(keyword,0);
+    search(keyword, 0);
 }
-
 
 
 function collapseExpansionJobareaLine(id, element) {
@@ -182,9 +180,9 @@ function showLine(DOMAIN_SEARCH, lineNum, element) {
                     var formAreaList = jobarea = '';
                     if (-1 != formValue.indexOf(',')) {
                         formAreaList = formValue.split(',');
-                        jobarea      = formAreaList[0];
+                        jobarea = formAreaList[0];
                     } else {
-                        jobarea      = formValue;
+                        jobarea = formValue;
                     }
 
                     list[i] = jobarea;
@@ -204,7 +202,7 @@ function showLine(DOMAIN_SEARCH, lineNum, element) {
             }
         });
 
-        var actionUrl = DOMAIN_SEARCH + '/jobsearch/ajax/get_line.php?rand='+ Math.random() + '&jsoncallback=?';
+        var actionUrl = DOMAIN_SEARCH + '/jobsearch/ajax/get_line.php?rand=' + Math.random() + '&jsoncallback=?';
 
         $.getJSON(actionUrl, list, function (data) {
             if ('' != data.data) {
@@ -271,9 +269,9 @@ function showDibiao(DOMAIN_SEARCH, districtNum, element) {
                     var formAreaList = jobarea = '';
                     if (-1 != formValue.indexOf(',')) {
                         formAreaList = formValue.split(',');
-                        jobarea      = formAreaList[0];
+                        jobarea = formAreaList[0];
                     } else {
-                        jobarea      = formValue;
+                        jobarea = formValue;
                     }
 
                     list[i] = jobarea;
@@ -292,7 +290,7 @@ function showDibiao(DOMAIN_SEARCH, districtNum, element) {
             }
         });
 
-        var actionUrl = DOMAIN_SEARCH + '/jobsearch/ajax/get_districtdibiao.php?rand='+ Math.random() + '&jsoncallback=?';
+        var actionUrl = DOMAIN_SEARCH + '/jobsearch/ajax/get_districtdibiao.php?rand=' + Math.random() + '&jsoncallback=?';
 
         $.getJSON(actionUrl, list, function (data) {
             if ('' != data.data) {
@@ -322,9 +320,9 @@ function showDibiao(DOMAIN_SEARCH, districtNum, element) {
 
 function collapseExpansion(DOMAIN_SEARCH, type, collapse) {
     $.ajax({
-        type:"get",
-        cache:false,
-        url:DOMAIN_SEARCH + '/jobsearch/ajax/collapse_expansion.php?collapse=' + collapse + '&type='+ type + '&ran=' + Math.random()
+        type: "get",
+        cache: false,
+        url: DOMAIN_SEARCH + '/jobsearch/ajax/collapse_expansion.php?collapse=' + collapse + '&type=' + type + '&ran=' + Math.random()
     });
 }
 
@@ -336,7 +334,9 @@ function showHotdibiaoid(element) {
     });
     $(element).addClass('dw_c_orange')
 }
+
 var filter_clicked_now;
+
 function showFilterOther(id, obj) {
     $('#otherFilter li').removeClass('on');
     if (filter_clicked_now == obj) {
@@ -346,13 +346,13 @@ function showFilterOther(id, obj) {
     }
     $(obj).addClass('on');
     var objs = ['filter_p_jobterm', 'filter_p_keyword', 'filter_p_jobarea', 'filter_p_dibiaoid', 'filter_p_line'];
-    if ($('#'+ id).is(':hidden')) {
-        $.each(objs, function(i, n) {
-            $('#'+ n).hide();
+    if ($('#' + id).is(':hidden')) {
+        $.each(objs, function (i, n) {
+            $('#' + n).hide();
         });
-        $('#'+ id).show();
+        $('#' + id).show();
     } else {
-        $('#'+ id).hide();
+        $('#' + id).hide();
     }
     $('.nk').hide();
     $('.kel').show();
@@ -370,8 +370,8 @@ function collapseExpansionSearch(DOMAIN_SEARCH, className, element) {
         collapseExpansion(DOMAIN_SEARCH, 9, 0);
         /* 收起其他筛选 */
         var objs = ['filter_p_jobterm', 'filter_p_keyword', 'filter_p_jobarea', 'filter_p_dibiaoid', 'filter_p_line'];
-        $.each(objs, function(i, n) {
-            $('#'+ n).hide();
+        $.each(objs, function (i, n) {
+            $('#' + n).hide();
         });
         $('.nk').hide();
     } else {  //展开
@@ -387,8 +387,7 @@ function selectAllJobs(element) {
         $("em[name='delivery_em']").removeClass("on");
         $("input[name='delivery_jobid']").attr("checked", false);
         $("div.op span.but_sq,div.op span.but_sc").addClass("uck");
-    }
-    else{
+    } else {
         $('#top_select_all_jobs_checkbox,#bottom_select_all_jobs_checkbox').addClass('on');
         $("em[name='delivery_em']").addClass("on");
         $("input[name='delivery_jobid']").attr("checked", true);
@@ -420,21 +419,15 @@ function showStatistics(type) {
 }
 
 
-
-
-function multipleChoiceShow(sType, bShow)
-{
-    if(bShow)
-    {
+function multipleChoiceShow(sType, bShow) {
+    if (bShow) {
         $("div[id^='filter_']").removeAttr("style");
         $('#filter_' + sType).hide();
         $("div[id^='multichoices_']").hide();
         $("#submit_" + sType).removeClass('unclick');
         $('#multichoices_' + sType).show();
         $("#multichoices_" + sType).find('div.err').hide();
-    }
-    else
-    {
+    } else {
         $("div[id^='multichoices_']").hide();
         $('#multichoices_' + sType).find('li.on').removeClass('on');
         $('#multichoices_' + sType).find("li[name='defaultmultichoices']").addClass('on');
@@ -443,57 +436,43 @@ function multipleChoiceShow(sType, bShow)
 }
 
 
-function checkMultipleChoice(oThis, sType)
-{
-    if($(oThis).hasClass('on'))
-    {
+function checkMultipleChoice(oThis, sType) {
+    if ($(oThis).hasClass('on')) {
         $("#multichoices_" + sType).find('div.err').hide();
         $(oThis).removeClass("on");
-        if($("#multichoices_" + sType).find("li.on").length == 0)
-        {
+        if ($("#multichoices_" + sType).find("li.on").length == 0) {
             $("#submit_" + sType).addClass('unclick');
             return;
         }
-    }
-    else
-    {
-        if($(oThis).attr('data-value') == '99')
-        {
+    } else {
+        if ($(oThis).attr('data-value') == '99') {
             $(oThis).siblings().removeClass("on");
             $(oThis).addClass('on');
-        }
-        else
-        {
+        } else {
             $(oThis).siblings("li[data-value='99']").removeClass('on');
         }
 
         $("#submit_" + sType).removeClass('unclick');
-        if($("#multichoices_" + sType).find("li.on").length >= 5)
-        {
+        if ($("#multichoices_" + sType).find("li.on").length >= 5) {
             $("#multichoices_" + sType).find('div.err').show();
             return;
-        }
-        else
-        {
+        } else {
             $("#multichoices_" + sType).find('div.err').hide();
             $(oThis).addClass("on");
         }
     }
 }
 
-function submitMultiChoices(sType)
-{
-    if(!$("#submit_" + sType).hasClass("unclick"))
-    {
+function submitMultiChoices(sType) {
+    if (!$("#submit_" + sType).hasClass("unclick")) {
         var aResult = [];
-        $("#multichoices_" + sType).find("li.on").each(function(){
+        $("#multichoices_" + sType).find("li.on").each(function () {
             aResult.push($(this).attr("data-value"));
         });
 
-        if(aResult == []){
+        if (aResult == []) {
             sResult = '99';
-        }
-        else{
+        } else {
             sResult = aResult.join(",");
         }
 
@@ -502,12 +481,11 @@ function submitMultiChoices(sType)
     }
 }
 
-function jumpPage(totalPage)
-{
+function jumpPage(totalPage) {
     var jumpPage = parseInt($('#jump_page').val());
 
     if (jumpPage > 0 && jumpPage <= totalPage) {
-        window.location.href = $('form[name=pageForm] input[name=pagejump]').val().replace('<<pagecode>>',jumpPage);
+        window.location.href = $('form[name=pageForm] input[name=pagejump]').val().replace('<<pagecode>>', jumpPage);
     } else {
         alert('请输入正确的页码');
     }

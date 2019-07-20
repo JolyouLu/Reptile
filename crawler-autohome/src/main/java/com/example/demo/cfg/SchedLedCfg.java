@@ -18,7 +18,7 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 public class SchedLedCfg {
     //定义关闭无效任务
     @Bean("crawlerAutohomeJobBean")
-    public JobDetailFactoryBean crawlerAutohomeJobBean(){
+    public JobDetailFactoryBean crawlerAutohomeJobBean() {
         //先创建一个任务描述的工厂bean
         JobDetailFactoryBean jobDetailFactoryBean = new JobDetailFactoryBean();
         //设置spring容器的key，任务中可以根据key获取spring容器
@@ -34,7 +34,7 @@ public class SchedLedCfg {
     //@Qualifier注解通过名字注入bean
     @Bean("crawlerAutohomeJobTrigger")
     public CronTriggerFactoryBean crawlerAutohomeJobTrigger(
-            @Qualifier(value = "crawlerAutohomeJobBean")JobDetailFactoryBean itemJobBean){
+            @Qualifier(value = "crawlerAutohomeJobBean") JobDetailFactoryBean itemJobBean) {
         //创建一个表达式触发器工厂bean
         CronTriggerFactoryBean tigger = new CronTriggerFactoryBean();
         //设置任务描述到触发器中
@@ -46,7 +46,7 @@ public class SchedLedCfg {
 
     //定义调度器
     @Bean
-    public SchedulerFactoryBean schedulerFactory(CronTrigger[] cronTriggerImpl){
+    public SchedulerFactoryBean schedulerFactory(CronTrigger[] cronTriggerImpl) {
         //创建任务调度器的工厂bean
         SchedulerFactoryBean bean = new SchedulerFactoryBean();
         //给任务调度器设置触发器

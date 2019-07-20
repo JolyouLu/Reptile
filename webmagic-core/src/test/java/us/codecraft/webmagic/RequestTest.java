@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author code4crafter@gmail.com
- *         Date: 17/3/11
+ * Date: 17/3/11
  */
 public class RequestTest {
 

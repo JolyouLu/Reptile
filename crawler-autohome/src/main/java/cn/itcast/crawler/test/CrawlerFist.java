@@ -13,7 +13,7 @@ import org.apache.http.util.EntityUtils;
  * @Version 1.0
  */
 public class CrawlerFist {
-    public static void main(String[] args)throws Exception {
+    public static void main(String[] args) throws Exception {
         //打开浏览器，创建httpclitent对象
         CloseableHttpClient httpClient = HttpClients.createDefault();
         //输入网站
@@ -23,7 +23,7 @@ public class CrawlerFist {
         CloseableHttpResponse response = httpClient.execute(httpGet);
         //解析响应获取数据
         //判断状态码是否是200
-        if (response.getStatusLine().getStatusCode()==200){
+        if (response.getStatusLine().getStatusCode() == 200) {
             HttpEntity httpEntity = response.getEntity();
             String string = EntityUtils.toString(httpEntity, "utf-8");
             System.out.println(string);

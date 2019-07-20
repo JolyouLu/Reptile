@@ -31,10 +31,10 @@ public class JpbProcessor implements PageProcessor {
         //解析页面，获取招聘信息详情的url地址
         List<Selectable> list = page.getHtml().css("div#resultList div.el").nodes();
         //判断获取的集合是否为空
-        if (list.size()==0){
+        if (list.size() == 0) {
             //如果为空，表示这是招聘信息详情页,解析页面，获取招聘详情信息，保存数据
             this.saveJobInfo(page);
-        }else {
+        } else {
             //如果不为空，表示这是列表页,解析出url地址，放到任务队列中
             for (Selectable selectable : list) {
                 //获取url地址
@@ -50,6 +50,7 @@ public class JpbProcessor implements PageProcessor {
         String html = page.getHtml().toString();
         System.out.println(html);
     }
+
     //解析页面，获取招聘信息，保存数据
     private void saveJobInfo(Page page) {
         //创建招聘详情对象
@@ -57,10 +58,10 @@ public class JpbProcessor implements PageProcessor {
         //解析页面
         Html html = page.getHtml();
         //获取数据，封装到对象中
-        jobInfo.setCompanyName(html.css("div.cn p.cname a","text").toString());
+        jobInfo.setCompanyName(html.css("div.cn p.cname a", "text").toString());
         jobInfo.setCompanyAddr(Jsoup.parse(html.css("div.bmsg").nodes().get(1).toString()).text());
         jobInfo.setCompanyInfo(Jsoup.parse(html.css("div.tmsg").toString()).text());
-        jobInfo.setJobName(html.css("div.cn h1","text").toString());
+        jobInfo.setJobName(html.css("div.cn h1", "text").toString());
         jobInfo.setJobAddr(Jsoup.parse(html.css("div.cn > p.msg ").regex("\\D\\D-\\D{2,3}").toString()).text());
         jobInfo.setJobInfo(Jsoup.parse(html.css("div.bmsg").nodes().get(0).toString()).text());
         jobInfo.setUrl(Jsoup.parse(html.css("div.tHeader > div.in > div.cn p.cname a").links().toString()).text());
@@ -69,14 +70,14 @@ public class JpbProcessor implements PageProcessor {
         jobInfo.setSalaryMin(salary[0]);
         jobInfo.setSalaryMax(salary[1]);
         String time = Jsoup.parse(html.css("div.tHeader > div.in > div.cn p.msg").regex("0\\d-\\d\\d\\D{2}").toString()).text();
-        jobInfo.setTime(time.substring(0,time.length()-2));
+        jobInfo.setTime(time.substring(0, time.length() - 2));
         //把结果保存起来
-        page.putField("jobInfo",jobInfo);
+        page.putField("jobInfo", jobInfo);
     }
 
     private Site site = Site.me()
             .setCharset("gbk") //设置编码格式
-            .setTimeOut(10*1000) //设置超时时间
+            .setTimeOut(10 * 1000) //设置超时时间
             .setRetrySleepTime(3000) //设置重试的间隔时间
             .setRetryTimes(3); //设置重试的次数
 

@@ -8,6 +8,7 @@ package com.example.demo.service;
 public interface ApiService {
     /**
      * get请求获取页面数据
+     *
      * @param url
      * @return
      */
@@ -15,6 +16,7 @@ public interface ApiService {
 
     /**
      * get请求下载图片
+     *
      * @param url
      * @return 返回图片名称
      */

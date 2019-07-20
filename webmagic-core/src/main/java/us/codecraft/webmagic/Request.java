@@ -41,13 +41,13 @@ public class Request implements Serializable {
     /**
      * Priority of the request.<br>
      * The bigger will be processed earlier. <br>
+     *
      * @see us.codecraft.webmagic.scheduler.PriorityScheduler
      */
     private long priority;
 
     /**
      * When it is set to TRUE, the downloader will not try to parse response body to text.
-     *
      */
     private boolean binaryContent = false;
 
@@ -67,10 +67,10 @@ public class Request implements Serializable {
     /**
      * Set the priority of request for sorting.<br>
      * Need a scheduler supporting priority.<br>
-     * @see us.codecraft.webmagic.scheduler.PriorityScheduler
      *
      * @param priority priority
      * @return this
+     * @see us.codecraft.webmagic.scheduler.PriorityScheduler
      */
     @Experimental
     public Request setPriority(long priority) {
@@ -113,6 +113,7 @@ public class Request implements Serializable {
 
     /**
      * The http method of the request. Get for default.
+     *
      * @return httpMethod
      * @see us.codecraft.webmagic.utils.HttpConstant.Method
      * @since 0.5.0
@@ -196,7 +197,7 @@ public class Request implements Serializable {
                 ", extras=" + extras +
                 ", priority=" + priority +
                 ", headers=" + headers +
-                ", cookies="+ cookies+
+                ", cookies=" + cookies +
                 '}';
     }
 

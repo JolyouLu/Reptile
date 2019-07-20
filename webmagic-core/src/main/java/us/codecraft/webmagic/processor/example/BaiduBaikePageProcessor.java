@@ -20,7 +20,7 @@ public class BaiduBaikePageProcessor implements PageProcessor {
 
     @Override
     public void process(Page page) {
-        page.putField("name", page.getHtml().css("dl.lemmaWgt-lemmaTitle h1","text").toString());
+        page.putField("name", page.getHtml().css("dl.lemmaWgt-lemmaTitle h1", "text").toString());
         page.putField("description", page.getHtml().xpath("//div[@class='lemma-summary']/allText()"));
     }
 
@@ -38,10 +38,10 @@ public class BaiduBaikePageProcessor implements PageProcessor {
 
         //multidownload
         List<String> list = new ArrayList<String>();
-        list.add(String.format(urlTemplate,"风力发电"));
-        list.add(String.format(urlTemplate,"太阳能"));
-        list.add(String.format(urlTemplate,"地热发电"));
-        list.add(String.format(urlTemplate,"地热发电"));
+        list.add(String.format(urlTemplate, "风力发电"));
+        list.add(String.format(urlTemplate, "太阳能"));
+        list.add(String.format(urlTemplate, "地热发电"));
+        list.add(String.format(urlTemplate, "地热发电"));
         List<ResultItems> resultItemses = spider.<ResultItems>getAll(list);
         for (ResultItems resultItemse : resultItemses) {
             System.out.println(resultItemse.getAll());

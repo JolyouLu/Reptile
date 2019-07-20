@@ -6,21 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="crawler-jd" />
-        <module name="crawler-job" />
-        <module name="crawler-webmagic" />
         <module name="demo" />
-        <module name="es" />
-        <module name="maven-archiver" />
-        <module name="simhasher" />
-        <module name="webmagic-core" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="demo" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="crawler-jd" options="-parameters" />
-      <module name="crawler-job" options="-parameters" />
       <module name="demo" options="-parameters" />
     </option>
   </component>

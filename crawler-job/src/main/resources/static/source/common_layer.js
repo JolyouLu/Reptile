@@ -8,8 +8,7 @@
 $.extend({
     commonLayer:
         {
-            init: function (oSettings)
-            {
+            init: function (oSettings) {
                 var aInit = [
                     'init',
                     'top',
@@ -39,19 +38,19 @@ $.extend({
                 });
 
                 var oFunctionInit = {
-                    'data_init'                  : jQuery.commonLayer.getInitContent,
-                    'layer_before_open'          : jQuery.commonLayer.beforeOpen,
-                    'layer_after_open'           : jQuery.commonLayer.afterOpen,
-                    'data_click'                 : jQuery.commonLayer.chooseEvent,
-                    'getTopContent'              : jQuery.commonLayer.getTopContent,
-                    'getTopMessageContent'       : jQuery.commonLayer.getTopMessageContent,
-                    'getTopMultipleContent'      : jQuery.commonLayer.getTopMultipleContent,
-                    'getCenterContent'           : jQuery.commonLayer.getCenterContent,
-                    'getCenterLeftContent'       : jQuery.commonLayer.getCenterLeftContent,
-                    'getCenterRightContent'      : jQuery.commonLayer.getCenterRightContent,
+                    'data_init': jQuery.commonLayer.getInitContent,
+                    'layer_before_open': jQuery.commonLayer.beforeOpen,
+                    'layer_after_open': jQuery.commonLayer.afterOpen,
+                    'data_click': jQuery.commonLayer.chooseEvent,
+                    'getTopContent': jQuery.commonLayer.getTopContent,
+                    'getTopMessageContent': jQuery.commonLayer.getTopMessageContent,
+                    'getTopMultipleContent': jQuery.commonLayer.getTopMultipleContent,
+                    'getCenterContent': jQuery.commonLayer.getCenterContent,
+                    'getCenterLeftContent': jQuery.commonLayer.getCenterLeftContent,
+                    'getCenterRightContent': jQuery.commonLayer.getCenterRightContent,
                     'getCenterRightCenterContent': jQuery.commonLayer.getCenterRightCenterContent,
-                    'getBottomContent'           : jQuery.commonLayer.getBottomContent,
-                    'getSubContent'              : jQuery.commonLayer.getSubContent
+                    'getBottomContent': jQuery.commonLayer.getBottomContent,
+                    'getSubContent': jQuery.commonLayer.getSubContent
                 };
 
                 $.each(oFunctionInit, function (i, value) {
@@ -70,8 +69,7 @@ $.extend({
 
                 oSettings.oLayerSettings = jQuery.commonLayer.initLayerSettings(oSettings, {});
 
-                if(typeof closeAllFloatDiv === "function")
-                {
+                if (typeof closeAllFloatDiv === "function") {
                     closeAllFloatDiv();
                 }
 
@@ -80,21 +78,18 @@ $.extend({
             },
             initLayerSettings: function (oSettings, options)  //初始化弹窗配置信息
             {
-                if ('undefined' == typeof oSettings.oLayerSettings)
-                {
+                if ('undefined' == typeof oSettings.oLayerSettings) {
                     var oLayerSettings = {
-                        'layer_id'         : oSettings.layer_id,
-                        'layer_type'       : '1',
+                        'layer_id': oSettings.layer_id,
+                        'layer_type': '1',
                         'layer_before_open': oSettings.layer_before_open,
-                        'layer_after_open' : oSettings.layer_after_open,
+                        'layer_after_open': oSettings.layer_after_open,
                         'layer_after_close': oSettings.layer_after_close,
-                        'layer_init'       : true
+                        'layer_init': true
                     };
 
                     oLayerSettings = jQuery.FLayer.init(oLayerSettings);
-                }
-                else
-                {
+                } else {
                     oLayerSettings = oSettings.oLayerSettings;
                 }
 
@@ -116,8 +111,7 @@ $.extend({
             {
                 var sContent = '<h2 id="' + oSettings.top + '">' + '<p id="' + oSettings.top_message + '">' + lang['layer']['select'] + lang[oSettings.data_type]['layer_name'];
 
-                if (oSettings.data_multiple)
-                {
+                if (oSettings.data_multiple) {
                     sContent += '<span class="sp">（' + lang['layer']['data_max_select'].replace(/{max}/, '<strong>' + oSettings.data_multiple_max + '</strong>') + '）</span>';
                 }
 
@@ -129,12 +123,10 @@ $.extend({
             {
                 var sContent = '';
 
-                if (oSettings.data_multiple)
-                {
+                if (oSettings.data_multiple) {
                     var sHideClass = '';
 
-                    if (0 == jQuery.commonSelect.oCurrentSelected[oSettings.data_type].length)
-                    {
+                    if (0 == jQuery.commonSelect.oCurrentSelected[oSettings.data_type].length) {
                         sHideClass = 'element_hide';
                     }
 
@@ -152,23 +144,20 @@ $.extend({
             },
             getCenterContent: function (oSettings)  //弹窗内容中间: getCenterLeftContent + getCenterRightContent
             {
-                return '<div id="' + oSettings.center + '" class="panel_selt">' + oSettings.getCenterLeftContent(oSettings) + oSettings.getCenterRightContent(oSettings) + '</div>' ;
+                return '<div id="' + oSettings.center + '" class="panel_selt">' + oSettings.getCenterLeftContent(oSettings) + oSettings.getCenterRightContent(oSettings) + '</div>';
             },
             getCenterLeftContent: function (oSettings)  //弹窗内容左侧
             {
                 var sContent = '<ul id="' + oSettings.center_left + '" class="sbar">';
 
                 $.each(oSettings.data_navigation, function (i, oInfo) {
-                    if ('0' == i)
-                    {
+                    if ('0' == i) {
                         sSelectedClass = oSettings.selected_class;
-                    }
-                    else
-                    {
+                    } else {
                         sSelectedClass = '';
                     }
 
-                    sContent += '<li id="' + oSettings.center_left_each + '_' + oInfo.nav + '" class="' + sSelectedClass+ '" data-value="' + oInfo.nav + '">' + oInfo[oSettings.language] + '<em></em></li>';
+                    sContent += '<li id="' + oSettings.center_left_each + '_' + oInfo.nav + '" class="' + sSelectedClass + '" data-value="' + oInfo.nav + '">' + oInfo[oSettings.language] + '<em></em></li>';
                 });
 
                 sContent += '</ul>';
@@ -186,31 +175,28 @@ $.extend({
 
                 //每行显示3条记录, 不足的补充
                 $.each(jQuery.commonLayer.getBigCategoryByNavigation(oSettings, iNavigationId), function (i, value) {
-                    if (0 == i%oSettings.data_row_num)
-                    {
+                    if (0 == i % oSettings.data_row_num) {
                         sContent += '<tr>';
                     }
 
-                    sContent += '<td class="js_more" name="0"><em id="' + oSettings.center_right_list_category + '_' + iNavigationId + '_' + value + '" data-value="' + value + '" data-navigation="' + iNavigationId + '" class="' + jQuery.commonLayer.getSelectedClass(oSettings, value) + '">' +　oSettings.data[value] + '</em></td>';
+                    sContent += '<td class="js_more" name="0"><em id="' + oSettings.center_right_list_category + '_' + iNavigationId + '_' + value + '" data-value="' + value + '" data-navigation="' + iNavigationId + '" class="' + jQuery.commonLayer.getSelectedClass(oSettings, value) + '">' + oSettings.data[value] + '</em></td>';
 
-                    if ((oSettings.data_row_num - 1) === i%oSettings.data_row_num)
-                    {
+                    if ((oSettings.data_row_num - 1) === i % oSettings.data_row_num) {
                         sContent += '</tr>';
                     }
                 });
 
-                sContent +=    '</tbody></table>' +
+                sContent += '</tbody></table>' +
                     '</div>';
 
                 return sContent;
             },
-            getBigCategoryByNavigation: function(oSettings, iNavigationId)  //通过左侧导航获取大类列表
+            getBigCategoryByNavigation: function (oSettings, iNavigationId)  //通过左侧导航获取大类列表
             {
                 var aBigCategory = [];
 
                 $.each(oSettings.data_navigation, function (i, value) {
-                    if (value.nav == iNavigationId)
-                    {
+                    if (value.nav == iNavigationId) {
                         aBigCategory = value.category;
 
                         return;
@@ -223,9 +209,8 @@ $.extend({
             {
                 var sContent = '';
 
-                if (oSettings.data_multiple)
-                {
-                    sContent = '<div id="'+ oSettings.bottom + '" class="but_box">' +
+                if (oSettings.data_multiple) {
+                    sContent = '<div id="' + oSettings.bottom + '" class="but_box">' +
                         '<span class="p_but" id="' + oSettings.bottom_save + '">' + lang['layer']['save'] + '</span><span class="p_but gray ' + oSettings.close + '">' + lang['layer']['cancel'] + '</span>' +
                         '</div>';
                 }
@@ -252,7 +237,7 @@ $.extend({
                 //绑定取消, 关闭事件
                 $('.' + oSettings.close).bind('click', oSettings, jQuery.commonLayer.closeEvent);
             },
-            afterOpen: function(oSettings)   //弹窗展示之后的处理，例如异步加载内容等，可在外部重写该方法
+            afterOpen: function (oSettings)   //弹窗展示之后的处理，例如异步加载内容等，可在外部重写该方法
             {
                 return;
             },
@@ -264,32 +249,27 @@ $.extend({
 
                 jQuery.commonLayer.deleteSelect(oSettings, $(this).attr("data-value"));
             },
-            deleteSelect: function (oSettings, iSelect)
-            {
+            deleteSelect: function (oSettings, iSelect) {
                 jQuery.commonSelect.deleteSelect(oSettings, $('#' + oSettings.multiple_selected_each + '_' + iSelect));
 
                 $('#' + oSettings.under_each + '_' + iSelect).remove();
 
                 var oMultiple = $('#' + oSettings.multiple);
 
-                if (0 == oMultiple.find('.ttag').length)
-                {
+                if (0 == oMultiple.find('.ttag').length) {
                     oMultiple.hide();
-                }
-                else
-                {
+                } else {
                     $('#' + oSettings.multiple_error).hide();
                 }
 
                 jQuery.commonLayer.removeSelectedClass(oSettings, iSelect);
             },
-            getSelectedClass: function (oSettings, iSelect)
-            {
+            getSelectedClass: function (oSettings, iSelect) {
                 var sSelectedClass = '';
 
                 if ('' == oSettings.data_map || 'undefined' == typeof oSettings.data_map[iSelect])  //没有大小类关系/没有小类
                 {
-                    if($.inArray(iSelect, jQuery.commonSelect.oCurrentSelected[oSettings.data_type].toString().split(",")) > -1)
+                    if ($.inArray(iSelect, jQuery.commonSelect.oCurrentSelected[oSettings.data_type].toString().split(",")) > -1)
                     // if (iSelect != "01" && -1 != jQuery.commonSelect.oCurrentSelected[oSettings.data_type].toString().indexOf(iSelect))
                     {
                         sSelectedClass = oSettings.selected_class;
@@ -298,15 +278,13 @@ $.extend({
 
                 return sSelectedClass;
             },
-            addSelectedClass: function (oSettings, iSelect, iNavigation)
-            {
-                $.each($('#' + oSettings.center_right + ' [data-value=' +iSelect + ']'), function (i, value) {
+            addSelectedClass: function (oSettings, iSelect, iNavigation) {
+                $.each($('#' + oSettings.center_right + ' [data-value=' + iSelect + ']'), function (i, value) {
                     $(this).addClass(oSettings.selected_class);
                 });
             },
-            removeSelectedClass: function (oSettings, iSelect)
-            {
-                $.each($('#' + oSettings.center_right + ' [data-value=' +iSelect + ']'), function (i, value) {
+            removeSelectedClass: function (oSettings, iSelect) {
+                $.each($('#' + oSettings.center_right + ' [data-value=' + iSelect + ']'), function (i, value) {
                     $(this).removeClass(oSettings.selected_class);
                 });
             },
@@ -316,7 +294,7 @@ $.extend({
 
                 var oSettings = oEvent.data;
 
-                var iNavigationId   = $(this).attr('data-value');
+                var iNavigationId = $(this).attr('data-value');
 
                 $(this).addClass(oSettings.selected_class);
                 $(this).siblings().removeClass(oSettings.selected_class);
@@ -330,24 +308,20 @@ $.extend({
                 if (oCurrentCenterRighList.length > 0)  //直接显示右边数据
                 {
                     oCurrentCenterRighList.show();
-                }
-                else  //构造数据
+                } else  //构造数据
                 {
                     aCenterRightList.eq(0).after(oSettings.getCenterRightCenterContent(oSettings, iNavigationId));
 
                     //绑定大类点击事件
                     $('#' + oSettings.center_right_list + '_' + iNavigationId).find('td em').bind('click', oSettings, jQuery.commonLayer.getSelectEvent);
                 }
-                if(oSettings.data_type == 'area' && iNavigationId == '000000')
-                {
+                if (oSettings.data_type == 'area' && iNavigationId == '000000') {
                     $('#work_position_special_area_zhusanjiao').show();
-                }
-                else
-                {
+                } else {
                     $('#work_position_special_area_zhusanjiao').hide();
                 }
 
-                $('#' + oSettings.center_right).find('.' + oSettings.center_right_list_sub_category).css({'position':'static'}).remove();
+                $('#' + oSettings.center_right).find('.' + oSettings.center_right_list_sub_category).css({'position': 'static'}).remove();
             },
             getSelectEvent: function (oEvent)  //大类点击事件: 有小类则显示小类, 没有小类, 则对当前选择项进行处理
             {
@@ -370,27 +344,22 @@ $.extend({
                         if ($('#' + oSettings.center_right_list_sub_category + '_' + iNavigation + '_' + iSelect).length > 0)  //子选项隐藏起来来, 将子选项显示出来
                         {
                             $('#' + oSettings.center_right_list_sub_category + '_' + iNavigation + '_' + iSelect).show();
-                        }
-                        else  //创建子选项
+                        } else  //创建子选项
                         {
                             $(this).parent().parent().after(oSettings.getSubContent(oSettings, aSub, $(this), iSelect));
 
                             var oCurrentCenterRightListSubCategory = $('#' + oSettings.center_right_list_sub_category + '_' + iNavigation + '_' + iSelect);
 
-                            if (oSettings.data_parent_click)
-                            {
+                            if (oSettings.data_parent_click) {
                                 oCurrentCenterRightListSubCategory.find('.' + oSettings.center_right_list_sub_category_each_all).bind('click', oSettings, jQuery.commonLayer.getSelectEvent);
                             }
 
                             oCurrentCenterRightListSubCategory.find('.' + oSettings.center_right_list_sub_category_each_unit).bind('click', oSettings, jQuery.commonLayer.getSelectEvent);
                         }
-                    }
-                    else
-                    {
+                    } else {
                         jQuery.commonLayer.setSelect(oSettings, iSelect, iNavigation);
                     }
-                }
-                else  //没有子选项/选择的是大类, 直接设置
+                } else  //没有子选项/选择的是大类, 直接设置
                 {
                     jQuery.commonLayer.setSelect(oSettings, iSelect, iNavigation);
                 }
@@ -400,8 +369,7 @@ $.extend({
                 var aSub = [];
 
                 if ('string' == typeof oSettings.data[iBig]) {
-                    if (('' != oSettings.data_map) && ('undefined' != typeof oSettings.data_map[iBig]) && ('' != oSettings.data_map[iBig]))
-                    {
+                    if (('' != oSettings.data_map) && ('undefined' != typeof oSettings.data_map[iBig]) && ('' != oSettings.data_map[iBig])) {
                         aSub = oSettings.data_map[iBig].split(',');
                     }
                 }
@@ -412,8 +380,7 @@ $.extend({
             {
                 var sContent = '', sSelectedClass = '';
 
-                if (-1 != jQuery.commonSelect.oCurrentSelected[oSettings.data_type].toString().indexOf(iSelect))
-                {
+                if (-1 != jQuery.commonSelect.oCurrentSelected[oSettings.data_type].toString().indexOf(iSelect)) {
                     sSelectedClass = oSettings.selected_class;
                 }
 
@@ -421,19 +388,17 @@ $.extend({
 
                 sContent += '<tr class="' + oSettings.center_right_list_sub_category + '" id="' + oSettings.center_right_list_sub_category + '_' + iNavigationId + '_' + iSelect + '">'
                     + '<td colspan="' + oSettings.data_row_num + '"><div class="in d0"><font style="left:' + jQuery.commonLayer.getArrowPosition(oJqueryElement) + 'px"></font><div>';
-                if(oSettings.data_parent_click)
-                {
+                if (oSettings.data_parent_click) {
                     sContent += '<span><em id="' + oSettings.center_right_list_sub_category_each + '_' + iNavigationId + '_' + iSelect + '" class="' + sSelectedClass + ' ' + oSettings.center_right_list_sub_category_each_all + '" data-value="' + iSelect + '" data-navigation="' + iNavigationId + '">' + lang['layer']['all'] + '</em></span>';
                 }
                 $.each(aSub, function (i, value) {
                     sSelectedClass = '';
 
-                    if (-1 != jQuery.commonSelect.oCurrentSelected[oSettings.data_type].toString().indexOf(value))
-                    {
+                    if (-1 != jQuery.commonSelect.oCurrentSelected[oSettings.data_type].toString().indexOf(value)) {
                         sSelectedClass = oSettings.selected_class;
                     }
 
-                    sContent += '<span><em id="' + oSettings.center_right_list_sub_category_each + '_' + iNavigationId + '_' + value + '" class="' + oSettings.center_right_list_sub_category_each_unit + ' ' + sSelectedClass + '" data-value="' + value + '" data-navigation="' + iNavigationId + '">'+ oSettings.data[value] + '</em></span>';
+                    sContent += '<span><em id="' + oSettings.center_right_list_sub_category_each + '_' + iNavigationId + '_' + value + '" class="' + oSettings.center_right_list_sub_category_each_unit + ' ' + sSelectedClass + '" data-value="' + value + '" data-navigation="' + iNavigationId + '">' + oSettings.data[value] + '</em></span>';
                 });
                 sContent += '</div></div></td></tr>';
 
@@ -441,25 +406,20 @@ $.extend({
             },
             getArrowPosition: function (oJqueryElement)  //获取小箭头的位置
             {
-                return oJqueryElement.position().left + oJqueryElement.width()/2;
+                return oJqueryElement.position().left + oJqueryElement.width() / 2;
             },
             setSelect: function (oSettings, iSelect, iNavigation)  //设置选择处理
             {
                 //1. 判断是添加还是删除
                 //2. 如果是添加, 判断是否可以进行添加
-                if (oSettings.data_multiple)
-                {
+                if (oSettings.data_multiple) {
                     sOperation = jQuery.commonLayer.getOperation(oSettings, iSelect);
 
-                    switch (sOperation)
-                    {
+                    switch (sOperation) {
                         case 'add':
-                            if (jQuery.commonSelect.canAdd(oSettings, iSelect))
-                            {
+                            if (jQuery.commonSelect.canAdd(oSettings, iSelect)) {
                                 jQuery.commonLayer.add(oSettings, iSelect, iNavigation);
-                            }
-                            else
-                            {
+                            } else {
                                 $('#' + oSettings.multiple_error).show();
                             }
                             break;
@@ -468,9 +428,7 @@ $.extend({
                             jQuery.commonLayer.deleteSelect(oSettings, iSelect);
                             break;
                     }
-                }
-                else
-                {
+                } else {
                     jQuery.commonSelect.replaceCurrentSelected(oSettings, iSelect);
                     jQuery.commonSelect.save(oSettings, iSelect, oSettings.data_struct_type);
                 }
@@ -482,16 +440,14 @@ $.extend({
                 var bFind = false;
 
                 $.each(jQuery.commonSelect.oCurrentSelected[oSettings.data_type], function (i, value) {
-                    if (value == iSelect)
-                    {
+                    if (value == iSelect) {
                         bFind = true;
 
                         return;
                     }
                 });
 
-                if (bFind)
-                {
+                if (bFind) {
                     sOperation = 'delete';
                 }
 
@@ -501,8 +457,7 @@ $.extend({
             {
                 aRepeatSelected = jQuery.commonSelect.getRepeatSelected(oSettings, iSelect);
 
-                if (aRepeatSelected.length > 0)
-                {
+                if (aRepeatSelected.length > 0) {
                     $.each(aRepeatSelected, function (i, value) {
                         jQuery.commonLayer.deleteSelect(oSettings, value);
                     });

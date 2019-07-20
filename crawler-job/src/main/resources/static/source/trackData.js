@@ -1,10 +1,11 @@
-(function() {
-	//放入cdn上，目前51job用户 
-    String.prototype.trim=function(){
+(function () {
+    //放入cdn上，目前51job用户 
+    String.prototype.trim = function () {
         return this.replace(/(^\s*)|(\s*$)/g, "");
     }
 
     var _tkd = "_tkd";
+
     function Tracker() {
         var oThis = this;
         oThis.p = {
@@ -15,15 +16,15 @@
         oThis.handle();
     }
 
-    Tracker.prototype = {      
-        handle:function (){
+    Tracker.prototype = {
+        handle: function () {
             var oThis = this;
-            try{
+            try {
                 _tracker_ : {
-                    var tkd = window[_tkd],isArray = false;
-                    if(tkd) {
+                    var tkd = window[_tkd], isArray = false;
+                    if (tkd) {
                         isArray = Object.prototype["toString"].call(Object(tkd)) == "[object Array]";
-                        if(!isArray){
+                        if (!isArray) {
                             break _tracker_;
                         }
                         //handle event
@@ -33,24 +34,24 @@
                     }
                     window[_tkd] = oThis.p;
                 }
-            }catch(exception){
+            } catch (exception) {
             }
         },
-        handleEvent : function(args){
+        handleEvent: function (args) {
             switch (args[0]) {
-               case "_trackSearch":
-                   send("search", args[1]);
+                case "_trackSearch":
+                    send("search", args[1]);
                     break;
-               case "_trackPageView":
-                   send("pageView", args[1]);
-                   break;
-               case "_trackEvent":
-                   send("event", args[1]);
-                   break;
+                case "_trackPageView":
+                    send("pageView", args[1]);
+                    break;
+                case "_trackEvent":
+                    send("event", args[1]);
+                    break;
             }
-         }
+        }
     }
-    
+
     //send get request
     function send(logType, params) {
         var win = window;

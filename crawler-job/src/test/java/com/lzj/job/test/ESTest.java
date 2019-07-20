@@ -38,19 +38,20 @@ public class ESTest {
 
     //创建索引和映射
     @Test
-    public void createIndex(){
+    public void createIndex() {
         this.elasticsearchTemplate.createIndex(JobInfoField.class);
         this.elasticsearchTemplate.putMapping(JobInfoField.class);
     }
+
     @Test
-    public void jobInfoDate(){
+    public void jobInfoDate() {
         //声明页面数。1开始
-        int p=1;
+        int p = 1;
         //声明查询的数据条数
-        int pageSize =0;
+        int pageSize = 0;
         do {
             //从数据库查询数据
-            Page<JobInfo> page = this.jobInfoService.findJobInfoByPage(p,500);
+            Page<JobInfo> page = this.jobInfoService.findJobInfoByPage(p, 500);
             //声明容器存放jobinfofield
             List<JobInfoField> list = new ArrayList<>();
             //把查询到的数据封装位JobInfoField
@@ -58,7 +59,7 @@ public class ESTest {
                 //声明对象
                 JobInfoField jobInfoField = new JobInfoField();
                 //封装数据,复制数据
-                BeanUtils.copyProperties(jobInfo,jobInfoField);
+                BeanUtils.copyProperties(jobInfo, jobInfoField);
                 //把封装好数据的对象放到list容器中
                 list.add(jobInfoField);
             }
@@ -68,7 +69,7 @@ public class ESTest {
             p++;
             //获取查询结果集的数据条数
             pageSize = page.getContent().size();
-        }while (pageSize == 500);
+        } while (pageSize == 500);
     }
 
 }

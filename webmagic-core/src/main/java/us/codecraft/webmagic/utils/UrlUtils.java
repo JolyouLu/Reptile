@@ -25,7 +25,7 @@ public class UrlUtils {
      * <br>
      * Borrowed from Jsoup.
      *
-     * @param url url
+     * @param url   url
      * @param refer refer
      * @return canonicalizeUrl
      */
@@ -50,7 +50,6 @@ public class UrlUtils {
     }
 
     /**
-     *
      * @param url url
      * @return new url
      * @deprecated
@@ -92,7 +91,7 @@ public class UrlUtils {
         int portIndex = domain.indexOf(":");
         if (portIndex != -1) {
             return domain.substring(0, portIndex);
-        }else {
+        } else {
             return domain;
         }
     }

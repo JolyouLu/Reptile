@@ -1,22 +1,17 @@
-$(document).ready(function(){
+$(document).ready(function () {
     window.cfg.root_userset_ajax = typeof window.cfg.root_userset_ajax === 'undefined' ? window.cfg.domain.i + "/userset/ajax" : window.cfg.root_userset_ajax;
 });
 
-function SelectAll()
-{
-    if($('input:checkbox[name="delivery_jobid"]:checked').length!=0)
-    {
+function SelectAll() {
+    if ($('input:checkbox[name="delivery_jobid"]:checked').length != 0) {
         return true;
     }
     return false;
 }
 
-if(typeof needLogin === 'undefined')
-{
-    function needLogin()
-    {
-        if(typeof(window.cfg.domain.login) === 'undefined')
-        {
+if (typeof needLogin === 'undefined') {
+    function needLogin() {
+        if (typeof (window.cfg.domain.login) === 'undefined') {
             window.cfg.domain.login = 'https://login.51job.com';
         }
         var refer = '?url=' + encodeURIComponent(window.location);
@@ -24,16 +19,12 @@ if(typeof needLogin === 'undefined')
     }
 }
 
-function SelectAllCheckbox(oThis, checkBoxEmName)
-{
-    if($(oThis).hasClass("on"))
-    {
+function SelectAllCheckbox(oThis, checkBoxEmName) {
+    if ($(oThis).hasClass("on")) {
         $('em').removeClass("on");
         $("em[name='" + checkBoxEmName + "']").next("input.checkbox").attr("checked", false);
         $("div.op span.but_sq,div.op span.but_sc,div.op span.but_sf").addClass("uck");
-    }
-    else
-    {
+    } else {
         $('em').addClass("on");
         $("em[name='" + checkBoxEmName + "']").next("input.checkbox").attr("checked", true);
         $("div.op span.but_sq,div.op span.but_sc,div.op span.but_sf").removeClass("uck");
@@ -41,18 +32,15 @@ function SelectAllCheckbox(oThis, checkBoxEmName)
 }
 
 
-function deleteCollection(sJobId)
-{
+function deleteCollection(sJobId) {
     var aJobId = [];
 
-    if(sJobId == "")
-    {
-        if($("input[name='delivery_jobid']:checked").length == 0)
-        {
+    if (sJobId == "") {
+        if ($("input[name='delivery_jobid']:checked").length == 0) {
             return false;
         }
 
-        $("input[name='delivery_jobid']:checked").each(function(){
+        $("input[name='delivery_jobid']:checked").each(function () {
             aJobId.push($(this).val());
         });
         sJobId = aJobId.join(",");
@@ -72,27 +60,23 @@ function deleteCollection(sJobId)
         + '<span class="p_but" onclick="deleteCollectionConfirm(\'' + sJobId + '\')">确定</span><span class="p_but gray layer_close">取消</span>'
         + '</div></div>';
 
-    jQuery.FLayer.setContent(oLayerSettings,sConfirmHtml);
+    jQuery.FLayer.setContent(oLayerSettings, sConfirmHtml);
     jQuery.FLayer.open(oLayerSettings);
     return false;
 }
 
-function deleteCollectionConfirm(sJobId)
-{
+function deleteCollectionConfirm(sJobId) {
 
-    $.getJSON(window.cfg.root_userset_ajax + '/collection.php?jsoncallback=?',{'type': 'delete', 'jobid': sJobId},function(result){
-            if(result['status'] == 1)
-            {
+    $.getJSON(window.cfg.root_userset_ajax + '/collection.php?jsoncallback=?', {
+            'type': 'delete',
+            'jobid': sJobId
+        }, function (result) {
+            if (result['status'] == 1) {
                 location.reload();
-            }
-            else
-            {
-                if(result['result'] == 'needlogin')
-                {
+            } else {
+                if (result['result'] == 'needlogin') {
                     needLogin();
-                }
-                else
-                {
+                } else {
                     systemError();
                 }
             }
@@ -101,26 +85,28 @@ function deleteCollectionConfirm(sJobId)
 }
 
 
-function saveCollection(sJobId)
-{
+function saveCollection(sJobId) {
     var aJobId = [];
 
-    if(sJobId == "")
-    {
-        if($("input[name='delivery_jobid']:checked").length == 0)
-        {
+    if (sJobId == "") {
+        if ($("input[name='delivery_jobid']:checked").length == 0) {
             alert("请在要选择的职位前打勾！");
             return false;
         }
 
-        $("input[name='delivery_jobid']:checked").each(function(){
+        $("input[name='delivery_jobid']:checked").each(function () {
             aJobId.push($(this).val());
         });
         sJobId = aJobId.join(",");
     }
 
-    $.getJSON(window.cfg.root_userset_ajax + '/collection.php?jsoncallback=?',{'type': 'add', 'jobid': sJobId, 'pageCode':$("#pageCode").val(),'refdomain':$('#refdomain').val(),'refpagecode':$('#refpagecode').val()},function(result)
-    {
+    $.getJSON(window.cfg.root_userset_ajax + '/collection.php?jsoncallback=?', {
+        'type': 'add',
+        'jobid': sJobId,
+        'pageCode': $("#pageCode").val(),
+        'refdomain': $('#refdomain').val(),
+        'refpagecode': $('#refpagecode').val()
+    }, function (result) {
         sSuccessHtml = '<div class="gp3">'
             + '<strong class="wd f16 center c_orange">'
             + '职位收藏成功！'
@@ -147,14 +133,10 @@ function saveCollection(sJobId)
             + '<a class="layer_close" href="javascript:void(0)"><i></i></a>'
             + '</h2>'
             + '<div class="pannel_con">';
-        if(result['status'] == 1)
-        {
+        if (result['status'] == 1) {
             sHtml += sSuccessHtml;
-        }
-        else
-        {
-            switch(result['result'])
-            {
+        } else {
+            switch (result['result']) {
                 case 3:
                     sHtml += sSavedHtml;
                     break;
@@ -175,44 +157,34 @@ function saveCollection(sJobId)
             + '</div>';
 
         oLayerSettings = jQuery.FLayer.init();
-        jQuery.FLayer.setContent(oLayerSettings,sHtml);
+        jQuery.FLayer.setContent(oLayerSettings, sHtml);
         jQuery.FLayer.open(oLayerSettings);
-        if(result['status'] == 1)
-        {
+        if (result['status'] == 1) {
             var t = setTimeout("jQuery.FLayer.close(oLayerSettings)", 2000);
         }
-        $("#my_collection_num").html(parseInt($("#my_collection_num").html())+result.rowcount);
+        $("#my_collection_num").html(parseInt($("#my_collection_num").html()) + result.rowcount);
         return false;
     });
 }
 
-function myrefresh(p_id)
-{
+function myrefresh(p_id) {
     var $applybtn = $("#operate_" + p_id).children("a:first");
-    if($applybtn.text() == '申请')
-    {
+    if ($applybtn.text() == '申请') {
         $applybtn.replaceWith("已申请");
     }
 }
 
 //勾选职位
-function checkboxClick(oThis)
-{
-    if($(oThis).hasClass("on"))
-    {
+function checkboxClick(oThis) {
+    if ($(oThis).hasClass("on")) {
         $(oThis).removeClass("on").next("input:checkbox").attr("checked", false);
-    }
-    else
-    {
+    } else {
         $(oThis).addClass("on").next("input:checkbox").attr("checked", true);
     }
 
-    if($('input:checkbox[name="delivery_jobid"]:checked').length==0)
-    {
+    if ($('input:checkbox[name="delivery_jobid"]:checked').length == 0) {
         $("div.op span.but_sq,div.op span.but_sc,div.op span.but_sf").addClass("uck");
-    }
-    else
-    {
+    } else {
         $("div.op span.but_sq,div.op span.but_sc,div.op span.but_sf").removeClass("uck");
     }
 }

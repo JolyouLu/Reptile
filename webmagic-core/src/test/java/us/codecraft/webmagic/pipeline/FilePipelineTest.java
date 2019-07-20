@@ -36,6 +36,7 @@ public class FilePipelineTest {
             }
         };
     }
+
     @Test
     public void testProcess() {
         FilePipeline filePipeline = new FilePipeline();

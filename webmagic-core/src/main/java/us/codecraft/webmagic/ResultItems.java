@@ -9,9 +9,9 @@ import java.util.Map;
  * It is contained in Page and will be processed in pipeline.
  *
  * @author code4crafter@gmail.com <br>
- * @since 0.1.0
  * @see Page
  * @see us.codecraft.webmagic.pipeline.Pipeline
+ * @since 0.1.0
  */
 public class ResultItems {
 

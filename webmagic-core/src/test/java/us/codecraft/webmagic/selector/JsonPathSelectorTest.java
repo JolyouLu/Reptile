@@ -40,7 +40,7 @@ public class JsonPathSelectorTest {
         String select = jsonPathSelector.select(text);
         List<String> list = jsonPathSelector.selectList(text);
         assertThat(select).isEqualTo("Nigel Rees");
-        assertThat(list).contains("Nigel Rees","Evelyn Waugh");
+        assertThat(list).contains("Nigel Rees", "Evelyn Waugh");
         jsonPathSelector = new JsonPathSelector("$.store.book[?(@.category == 'reference')].title");
         list = jsonPathSelector.selectList(text);
         select = jsonPathSelector.select(text);
@@ -48,8 +48,8 @@ public class JsonPathSelectorTest {
         assertThat(list).contains("Sayings of the Century");
         jsonPathSelector = new JsonPathSelector("$.store.book[?(@.category == 'reference')]");
         select = jsonPathSelector.select(text);
-        JSONObject object1= JSON.parseObject(select);
-        JSONObject object2=JSON.parseObject("{\"author\":\"Nigel Rees\",\"title\":\"Sayings of the Century\",\"category\":\"reference\",\"price\":8.95}");
+        JSONObject object1 = JSON.parseObject(select);
+        JSONObject object2 = JSON.parseObject("{\"author\":\"Nigel Rees\",\"title\":\"Sayings of the Century\",\"category\":\"reference\",\"price\":8.95}");
         assertThat(object1).isEqualTo(object2);
     }
 

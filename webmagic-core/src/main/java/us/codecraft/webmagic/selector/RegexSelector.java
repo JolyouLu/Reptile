@@ -35,12 +35,13 @@ public class RegexSelector implements Selector {
             this.regex = Pattern.compile(regexStr, Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
             this.regexStr = regexStr;
         } catch (PatternSyntaxException e) {
-            throw new IllegalArgumentException("invalid regex "+regexStr, e);
+            throw new IllegalArgumentException("invalid regex " + regexStr, e);
         }
     }
 
     /**
      * Create a RegexSelector. When there is no capture group, the value is set to 0 else set to 1.
+     *
      * @param regexStr
      */
     public RegexSelector(String regexStr) {

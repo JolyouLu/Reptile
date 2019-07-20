@@ -26,40 +26,41 @@ public interface CarTestMapper {
 
     /**
      * 保存
+     *
      * @param cart
      */
     @Insert(
-        "INSERT INTO `car_test` (" +
-        "	`title`," +
-        "	`test_speed`," +
-        "	`test_brake`," +
-        "	`test_oil`," +
-        "	`editor_name1`," +
-        "	`editor_remark1`," +
-        "	`editor_name2`," +
-        "	`editor_remark2`," +
-        "	`editor_name3`," +
-        "	`editor_remark3`," +
-        "	`image`," +
-        "	`created`," +
-        "	`updated` " +
-        ")" +
-        "VALUES" +
-        "	( " +
-        "		#{title}," +
-        "		#{testSpeed}," +
-        "		#{testBrake}," +
-        "		#{testOil}," +
-        "		#{editorName1}," +
-        "		#{editorRemark1}," +
-        "		#{editorName2}," +
-        "		#{editorRemark2}," +
-        "		#{editorName3}," +
-        "		#{editorRemark3}," +
-        "		#{image}," +
-        "		#{created}," +
-        "		#{updated}" +
-        "	)"
+            "INSERT INTO `car_test` (" +
+                    "	`title`," +
+                    "	`test_speed`," +
+                    "	`test_brake`," +
+                    "	`test_oil`," +
+                    "	`editor_name1`," +
+                    "	`editor_remark1`," +
+                    "	`editor_name2`," +
+                    "	`editor_remark2`," +
+                    "	`editor_name3`," +
+                    "	`editor_remark3`," +
+                    "	`image`," +
+                    "	`created`," +
+                    "	`updated` " +
+                    ")" +
+                    "VALUES" +
+                    "	( " +
+                    "		#{title}," +
+                    "		#{testSpeed}," +
+                    "		#{testBrake}," +
+                    "		#{testOil}," +
+                    "		#{editorName1}," +
+                    "		#{editorRemark1}," +
+                    "		#{editorName2}," +
+                    "		#{editorRemark2}," +
+                    "		#{editorName3}," +
+                    "		#{editorRemark3}," +
+                    "		#{image}," +
+                    "		#{created}," +
+                    "		#{updated}" +
+                    "	)"
     )
     void saveCarTest(CarTest cart);
 }

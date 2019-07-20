@@ -4,9 +4,9 @@ package us.codecraft.webmagic;
  * Interface for identifying different tasks.<br>
  *
  * @author code4crafter@gmail.com <br>
- * @since 0.1.0
  * @see us.codecraft.webmagic.scheduler.Scheduler
  * @see us.codecraft.webmagic.pipeline.Pipeline
+ * @since 0.1.0
  */
 public interface Task {
 

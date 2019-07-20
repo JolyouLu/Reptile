@@ -21,11 +21,11 @@ import javax.lang.model.element.PackageElement;
 public class ProxyTest implements PageProcessor {
 
     @Scheduled(fixedDelay = 1000)
-    public void Process(){
+    public void Process() {
         //创建一个下载器Downloader
         HttpClientDownloader httpClientDownloader = new HttpClientDownloader();
         //给下载器设置代理服务器
-        httpClientDownloader.setProxyProvider(SimpleProxyProvider.from(new Proxy("171.80.162.98",5225)));
+        httpClientDownloader.setProxyProvider(SimpleProxyProvider.from(new Proxy("171.80.162.98", 5225)));
         Spider.create(new ProxyTest())
                 .addUrl("http://ip.tool.chinaz.com/")
                 .setDownloader(httpClientDownloader)//设置下载器

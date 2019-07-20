@@ -33,7 +33,8 @@ public class ItemServiceImpl implements ItemService {
     public void saveAll(List<Item> list) {
         this.itemRepository.saveAll(list);
     }
-    public Iterable<Item> findAll(){
+
+    public Iterable<Item> findAll() {
         Iterable<Item> items = this.itemRepository.findAll();
         return items;
     }
@@ -44,17 +45,17 @@ public class ItemServiceImpl implements ItemService {
     }
 
     public List<Item> findAllByTitleAndContent(String title, String content) {
-        List<Item> list = this.itemRepository.findAllByTitleAndContent(title,content);
+        List<Item> list = this.itemRepository.findAllByTitleAndContent(title, content);
         return list;
     }
 
     public Page<Item> findByTitleOrContent(String title, String content, Integer page, Integer rows) {
-        Page<Item> items = this.itemRepository.findByTitleOrContent(title,content,PageRequest.of(page,rows));
+        Page<Item> items = this.itemRepository.findByTitleOrContent(title, content, PageRequest.of(page, rows));
         return items;
     }
 
     public Page<Item> findByTitleAndContentAndIdBetween(String title, String content, int min, int max, int page, int row) {
-        Page<Item> items = this.itemRepository.findByTitleAndContentAndIdBetween(title,content,min,max,PageRequest.of(page-1,row));
+        Page<Item> items = this.itemRepository.findByTitleAndContentAndIdBetween(title, content, min, max, PageRequest.of(page - 1, row));
         return items;
     }
 

@@ -27,7 +27,7 @@ public interface ItemService {
     List<Item> findAllByTitleAndContent(String title, String content);
 
     //根据标题或内容查询，并集
-    Page<Item> findByTitleOrContent(String title, String content,Integer page,Integer rows);
+    Page<Item> findByTitleOrContent(String title, String content, Integer page, Integer rows);
 
     //根据title或者content和id的范围，进行分页查询
     Page<Item> findByTitleAndContentAndIdBetween(String title, String content, int min, int max, int page, int row);

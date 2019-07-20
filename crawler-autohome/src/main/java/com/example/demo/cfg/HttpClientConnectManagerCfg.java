@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class HttpClientConnectManagerCfg {
     @Bean
-    public PoolingHttpClientConnectionManager poolingHttpClientConnectionManager(){
+    public PoolingHttpClientConnectionManager poolingHttpClientConnectionManager() {
         //创建链接管理器
         PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
         //设置最大链接数

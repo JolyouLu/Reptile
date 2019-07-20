@@ -53,7 +53,7 @@ public final class WordsSegment {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
 
         }
         return list;

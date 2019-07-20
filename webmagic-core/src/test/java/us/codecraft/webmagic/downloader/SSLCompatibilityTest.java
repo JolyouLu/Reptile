@@ -10,8 +10,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author code4crafter@gmail.com
- *         Date: 2017/11/29
- *         Time: 下午1:32
+ * Date: 2017/11/29
+ * Time: 下午1:32
  */
 public class SSLCompatibilityTest {
 

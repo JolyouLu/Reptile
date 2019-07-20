@@ -35,28 +35,28 @@ public class ApiServiceImpl implements ApiService {
         //声明httpget请求
         HttpGet httpGet = new HttpGet(url);
         //设置用户代理信息
-        httpGet.setHeader("User-Agent","");
+        httpGet.setHeader("User-Agent", "");
         //设置请求参数RequestConfig
         httpGet.setConfig(this.getConfig());
         CloseableHttpResponse response = null;
         try {
             //使用httpclient发起请求，返回response
-             response = httpClient.execute(httpGet);
+            response = httpClient.execute(httpGet);
             //解析response返回的数据
-            if (response.getStatusLine().getStatusCode() == 200){
+            if (response.getStatusLine().getStatusCode() == 200) {
                 String html = "";
                 //如果response.getEntity获取结果是空，在执行EntityUtils.toString会报错
                 //需要对Entity进行非空判断
-                if (response.getEntity()!=null){
+                if (response.getEntity() != null) {
                     html = EntityUtils.toString(response.getEntity(), "UTF-8");
                 }
-                return  html;
+                return html;
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
-                if (response!=null) {
+                if (response != null) {
                     //关闭连接
                     response.close();
                 }
@@ -76,7 +76,7 @@ public class ApiServiceImpl implements ApiService {
         //声明httpget请求
         HttpGet httpGet = new HttpGet(url);
         //设置用户代理信息
-        httpGet.setHeader("User-Agent","");
+        httpGet.setHeader("User-Agent", "");
         //设置请求参数RequestConfig
         httpGet.setConfig(this.getConfig());
         CloseableHttpResponse response = null;
@@ -84,15 +84,15 @@ public class ApiServiceImpl implements ApiService {
             //使用httpclient发起请求，返回response
             response = httpClient.execute(httpGet);
             //解析response下载图片
-            if (response.getStatusLine().getStatusCode() == 200){
+            if (response.getStatusLine().getStatusCode() == 200) {
                 //image/gif
                 String contentType = response.getEntity().getContentType().getValue();
                 //获取文件类型image[0]/[1]gif[2]从第1个字符开始切
-                String extName = "."+contentType.split("/")[1];
+                String extName = "." + contentType.split("/")[1];
                 //使用uuid生成图片名
-                String  imageName= UUID.randomUUID().toString()+extName;
+                String imageName = UUID.randomUUID().toString() + extName;
                 //声明输出的文件
-                OutputStream outStream = new FileOutputStream(new File("D:/images/"+imageName));
+                OutputStream outStream = new FileOutputStream(new File("D:/images/" + imageName));
                 //使用响应体输出文件
                 response.getEntity().writeTo(outStream);
                 //返回生成的图片名称
@@ -100,9 +100,9 @@ public class ApiServiceImpl implements ApiService {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
-                if (response!=null) {
+                if (response != null) {
                     //关闭连接
                     response.close();
                 }
@@ -117,13 +117,14 @@ public class ApiServiceImpl implements ApiService {
 
     /**
      * 获取请求参数对象
+     *
      * @return
      */
-    private RequestConfig getConfig(){
+    private RequestConfig getConfig() {
         RequestConfig config = RequestConfig.custom().setConnectTimeout(1000)//设置创建连接超时时间
                 .setConnectionRequestTimeout(500)//设置获取连接超时时间
                 .setSocketTimeout(10000)//设置连接超时时间
                 .build();
-        return  config;
+        return config;
     }
 }

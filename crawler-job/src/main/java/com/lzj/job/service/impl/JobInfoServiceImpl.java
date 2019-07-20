@@ -29,7 +29,7 @@ public class JobInfoServiceImpl implements JobInfoService {
 
         if (list.size() == 0) {
             //没有查询到数据则新增或者修改数据
-            this.jobInfoDao.saveAndFlush(jobInfo); 
+            this.jobInfoDao.saveAndFlush(jobInfo);
         }
     }
 

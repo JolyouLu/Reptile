@@ -15,8 +15,8 @@ import static org.mockito.Mockito.verify;
 
 /**
  * @author code4crafter@gmail.com
- *         Date: 17/3/11
- *         Time: 上午11:26
+ * Date: 17/3/11
+ * Time: 上午11:26
  */
 @RunWith(MockitoJUnitRunner.class)
 public class DuplicateRemovedSchedulerTest {
@@ -35,7 +35,7 @@ public class DuplicateRemovedSchedulerTest {
         Request request = new Request("https://www.google.com/");
         request.setMethod(HttpConstant.Method.POST);
         duplicateRemovedScheduler.push(request, null);
-        verify(duplicateRemover,times(0)).isDuplicate(any(Request.class),any(Task.class));
+        verify(duplicateRemover, times(0)).isDuplicate(any(Request.class), any(Task.class));
     }
 
     @Test
@@ -45,6 +45,6 @@ public class DuplicateRemovedSchedulerTest {
         Request request = new Request("https://www.google.com/");
         request.setMethod(HttpConstant.Method.GET);
         duplicateRemovedScheduler.push(request, null);
-        verify(duplicateRemover,times(1)).isDuplicate(any(Request.class),any(Task.class));
+        verify(duplicateRemover, times(1)).isDuplicate(any(Request.class), any(Task.class));
     }
 }

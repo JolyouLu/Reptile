@@ -18,7 +18,7 @@ import java.net.URL;
  */
 public class JsoupFirstTest {
     @Test
-    public void testUrl() throws Exception{
+    public void testUrl() throws Exception {
         //解析url地址,第一给参数的访问的url，第二给参数是访问的超时时间
         Document doc = Jsoup.parse(new URL("http://www.itcast.cn"), 10000);
         //使用标签选择器,获取title标签中的内容
@@ -29,7 +29,7 @@ public class JsoupFirstTest {
     }
 
     @Test
-    public void testString() throws Exception{
+    public void testString() throws Exception {
         //使用工具类读取文件，获取字符串
         String conetxt = FileUtils.readFileToString(new File("D:/images/test.html"), "utf-8");
         //解析字符串
@@ -39,7 +39,7 @@ public class JsoupFirstTest {
     }
 
     @Test
-    public void testFile() throws Exception{
+    public void testFile() throws Exception {
         //解析文件
         Document document = Jsoup.parse(new File("D:/images/test.html"), "utf-8");
         String title = document.getElementsByTag("title").first().text();
@@ -48,7 +48,7 @@ public class JsoupFirstTest {
     }
 
     @Test
-    public void testDom() throws Exception{
+    public void testDom() throws Exception {
         //解析文件
         Document document = Jsoup.parse(new File("D:/images/test.html"), "utf-8");
         //获取元素
@@ -60,8 +60,9 @@ public class JsoupFirstTest {
         System.out.println(elementById.text());
         System.out.println(first);
     }
+
     @Test
-    public void testSelect() throws Exception{
+    public void testSelect() throws Exception {
         //解析文件
         Document document = Jsoup.parse(new File("D:/images/test.html"), "utf-8");
         //通过标签获取
@@ -82,8 +83,9 @@ public class JsoupFirstTest {
         }
         System.out.println(first);
     }
+
     @Test
-    public void testSelector2() throws  Exception{
+    public void testSelector2() throws Exception {
         //解析文件
         Document document = Jsoup.parse(new File("D:/images/test.html"), "utf-8");
         //元素+ID el#id

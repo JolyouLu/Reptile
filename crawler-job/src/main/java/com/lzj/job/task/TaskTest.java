@@ -16,7 +16,7 @@ import java.io.IOException;
 //@Component
 public class TaskTest {
     @Scheduled(cron = "0/5 * * * * *")
-    public void test(){
+    public void test() {
         String str1 = readAllFile("D:/test/testin.txt");
         SimHasher hash1 = new SimHasher(str1);
         //打印simhash签名
@@ -33,6 +33,7 @@ public class TaskTest {
         System.out.println(hash1.getHammingDistance(hash2.getSignature()));
 
     }
+
     public static String readAllFile(String filename) {
         String everything = "";
         try {

@@ -16,7 +16,7 @@ public class ResultItemsTest {
         resultItems.put("a", "a");
         resultItems.put("b", "b");
         resultItems.put("c", "c");
-        assertThat(resultItems.getAll().keySet()).containsExactly("a","b","c");
+        assertThat(resultItems.getAll().keySet()).containsExactly("a", "b", "c");
 
     }
 }

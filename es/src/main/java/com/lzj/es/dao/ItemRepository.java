@@ -13,7 +13,7 @@ import java.util.List;
  * @Date: 2019/7/10 10:57
  * @Version 1.0
  */
-public interface ItemRepository extends ElasticsearchRepository<Item,Integer> {
+public interface ItemRepository extends ElasticsearchRepository<Item, Integer> {
 
     List<Item> findAllByTitleAndContent(String title, String content);
 

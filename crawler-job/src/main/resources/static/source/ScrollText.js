@@ -1,6 +1,6 @@
 function ScrollText(content, btnPrevious, btnNext, autoStart, lineheight) {
     this.Delay = 10;
-    this.LineHeight = lineheight ? lineheight :20;
+    this.LineHeight = lineheight ? lineheight : 20;
     this.Amount = 1; //注意:LineHeight一定要能整除Amount.
     this.Direction = "up";
     this.Timeout = 1500;
@@ -26,33 +26,33 @@ function ScrollText(content, btnPrevious, btnNext, autoStart, lineheight) {
     }
 }
 
-ScrollText.prototype.$ = function(element) {
+ScrollText.prototype.$ = function (element) {
     return document.getElementById(element);
 }
 
-ScrollText.prototype.Previous = function() {
+ScrollText.prototype.Previous = function () {
     clearTimeout(this.AutoScrollTimer);
     clearTimeout(this.ScrollTimer);
     this.Scroll("up");
 }
 
-ScrollText.prototype.Next = function() {
+ScrollText.prototype.Next = function () {
     clearTimeout(this.AutoScrollTimer);
     clearTimeout(this.ScrollTimer);
     this.Scroll("down");
 }
 
-ScrollText.prototype.Start = function() {
+ScrollText.prototype.Start = function () {
     clearTimeout(this.AutoScrollTimer);
     this.AutoScrollTimer = setTimeout(this.GetFunction(this, "AutoScroll"), this.Timeout);
 }
 
-ScrollText.prototype.Stop = function() {
+ScrollText.prototype.Stop = function () {
     clearTimeout(this.ScrollTimer);
     clearTimeout(this.AutoScrollTimer);
 }
 
-ScrollText.prototype.AutoScroll = function() {
+ScrollText.prototype.AutoScroll = function () {
     if (this.Direction == "up") {
         if (parseInt(this.ScrollContent.scrollTop) >= parseInt(this.ScrollContent.scrollHeight) / 2) {
             this.ScrollContent.scrollTop = 0;
@@ -71,7 +71,7 @@ ScrollText.prototype.AutoScroll = function() {
     }
 }
 
-ScrollText.prototype.Scroll = function(direction) {
+ScrollText.prototype.Scroll = function (direction) {
     if (direction == "up") {
         if (this.ScrollContent.scrollTop == 0) {
             this.ScrollContent.scrollTop = parseInt(this.ScrollContent.scrollHeight) / 2;
@@ -88,8 +88,8 @@ ScrollText.prototype.Scroll = function(direction) {
     }
 }
 
-ScrollText.prototype.GetFunction = function(variable, method, param) {
-    return function() {
+ScrollText.prototype.GetFunction = function (variable, method, param) {
+    return function () {
         variable[method](param);
     }
 }

@@ -24,7 +24,7 @@ public class SpringDataPipeline implements Pipeline {
         //获取封装好的招聘对象
         JobInfo jobInfo = resultItems.get("jobInfo");
         //判断数据是否不为空
-        if (!jobInfo.equals(null)){
+        if (!jobInfo.equals(null)) {
             //如果不为空保存
             this.jobInfoService.save(jobInfo);
         }

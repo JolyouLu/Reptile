@@ -14,6 +14,7 @@ public interface CarTestService {
 
     /**
      * 分页查询评测数据的汽车标题
+     *
      * @param page
      * @param rows
      * @return
@@ -22,6 +23,7 @@ public interface CarTestService {
 
     /**
      * 保存
+     *
      * @param cart
      */
     void saveCarTest(CarTest cart);

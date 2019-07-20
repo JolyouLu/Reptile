@@ -59,7 +59,7 @@ public class Site {
     /**
      * Add a cookie with domain {@link #getDomain()}
      *
-     * @param name name
+     * @param name  name
      * @param value value
      * @return this
      */
@@ -72,13 +72,13 @@ public class Site {
      * Add a cookie with specific domain.
      *
      * @param domain domain
-     * @param name name
-     * @param value value
+     * @param name   name
+     * @param value  value
      * @return this
      */
     public Site addCookie(String domain, String name, String value) {
-        if (!cookies.containsKey(domain)){
-            cookies.put(domain,new HashMap<String, String>());
+        if (!cookies.containsKey(domain)) {
+            cookies.put(domain, new HashMap<String, String>());
         }
         cookies.get(domain).put(name, value);
         return this;
@@ -109,7 +109,7 @@ public class Site {
      *
      * @return get cookies
      */
-    public Map<String,Map<String, String>> getAllCookies() {
+    public Map<String, Map<String, String>> getAllCookies() {
         return cookies;
     }
 
@@ -319,6 +319,7 @@ public class Site {
      * Downloader is supposed to store response cookie.
      * Disable it to ignore all cookie fields and stay clean.
      * Warning: Set cookie will still NOT work if disableCookieManagement is true.
+     *
      * @param disableCookieManagement disableCookieManagement
      * @return this
      */

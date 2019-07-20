@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component;
  * @Version 1.0
  */
 @Component
-public interface JobRepository extends ElasticsearchRepository<JobInfoField,Long> {
+public interface JobRepository extends ElasticsearchRepository<JobInfoField, Long> {
 
 }
